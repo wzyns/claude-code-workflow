@@ -93,10 +93,10 @@ Prefix every commit message subject with `[#<issue_number>] ` to track the relat
 
 ## What lives elsewhere (not in this repo)
 
-When the `ccw` plugin is *used* (in some other project), it creates:
+When the `ccw` plugin is *used* (in some other project), it creates `.claude/ccw/<feature-name>/` containing:
 
-- `.claude/ccw/<feature-name>/state.json` — progress state for an in-progress feature
-- `.claude/ccw/<feature-name>/config.json` — verification commands for that feature
-- `docs/features/<feature-name>/design.md` and `plan.md` — feature artifacts
+- `state.json` — progress state for an in-progress feature
+- `config.json` — verification commands for that feature
+- `design.md` and `plan.md` — feature artifacts (default location; the user may pick an external destination like Confluence instead)
 
 These paths are mentioned here for context only. They never appear in this repo.

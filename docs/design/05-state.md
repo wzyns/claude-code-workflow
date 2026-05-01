@@ -11,17 +11,17 @@ The orchestrator and each sub-skill persist progress in `.claude/ccw/<feature-na
   "current_phase": "implement",
   "completed_phases": ["design", "document", "plan"],
   "config": {
-    "design_doc_path": "docs/features/user-auth/design.md",
+    "design_doc_path": ".claude/ccw/user-auth/design.md",
     "design_doc_external": null,
-    "plan_doc_path": "docs/features/user-auth/plan.md",
+    "plan_doc_path": ".claude/ccw/user-auth/plan.md",
     "test_command": "npm test",
     "lint_command": "npm run lint",
     "integration_test_command": "npm run test:integration",
     "branch_name": "feature/user-auth"
   },
   "artifacts": {
-    "design_doc": "docs/features/user-auth/design.md",
-    "plan_doc": "docs/features/user-auth/plan.md",
+    "design_doc": ".claude/ccw/user-auth/design.md",
+    "plan_doc": ".claude/ccw/user-auth/plan.md",
     "implementation_steps": [
       { "step": 1, "description": "Define schema", "status": "done" },
       { "step": 2, "description": "API endpoints", "status": "in_progress" },

@@ -23,7 +23,7 @@ Decompose the implementation into well-defined, independently verifiable steps.
 
 ## Output
 
-- `plan.md` (in the chosen location, defaulting to `docs/features/<name>/plan.md`)
+- `plan.md` (in the chosen location, defaulting to `.claude/ccw/<name>/plan.md`)
 - `config.json` populated with verification commands
 - A new git branch
 - `state.json.artifacts.plan_doc` and `state.json.artifacts.implementation_steps` populated

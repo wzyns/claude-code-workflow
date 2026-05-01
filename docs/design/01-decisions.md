@@ -9,7 +9,7 @@ This file captures the design decisions made for `ccw` and the reasoning behind 
 | Version strategy | Explicit semver in `plugin.json`, manually bumped per release | Updates only roll out to other machines when version is bumped |
 | Skill structure | Hybrid (orchestrator + per-phase sub-skills) | Each phase can be invoked independently and reused |
 | Progress state storage | `.claude/ccw/<feature-name>/state.json` | Local metadata in the consuming project; gitignored |
-| Artifact storage (default) | `docs/features/<feature-name>/` | Treats design and plan documents as git-tracked assets |
+| Artifact storage (default) | `.claude/ccw/<feature-name>/` | Keeps all per-feature ccw output in one directory; git tracking is the user's choice (see `.gitignore` guidance in README) |
 | Artifact location prompt | Asked each time | Allows external destinations such as Confluence |
 | Autonomy level | User confirmation at every phase transition | Ensures the user can add input before progressing |
 | AI review tool | Instructs the user to run `/ultrareview` | The skill cannot invoke `/ultrareview` itself |
