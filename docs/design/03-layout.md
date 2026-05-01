@@ -21,7 +21,6 @@ claude-code-workflow/
 │       ├── 04-distribution.md
 │       ├── 05-state.md
 │       ├── 06-transitions.md
-│       ├── 07-open-items.md
 │       └── phases/
 │           ├── start.md
 │           ├── design.md

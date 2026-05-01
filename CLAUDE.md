@@ -29,7 +29,6 @@ The plugin consists of:
 │       ├── 04-distribution.md
 │       ├── 05-state.md
 │       ├── 06-transitions.md
-│       ├── 07-open-items.md
 │       └── phases/
 │           ├── start.md
 │           ├── design.md
@@ -67,7 +66,6 @@ This convention is intentional. There is no automated build that enforces parity
 - **"What does phase X do?"** → `docs/design/phases/<phase>.md`
 - **"What's the state.json schema?"** → [docs/design/05-state.md](docs/design/05-state.md)
 - **"How is it distributed/installed?"** → [docs/design/04-distribution.md](docs/design/04-distribution.md)
-- **"What's intentionally out of scope?"** → [docs/design/07-open-items.md](docs/design/07-open-items.md)
 
 ## Plugin packaging
 
