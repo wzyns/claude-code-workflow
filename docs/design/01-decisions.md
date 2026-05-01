@@ -1,0 +1,17 @@
+# Design Decisions
+
+This file captures the design decisions made for `ccw` and the reasoning behind each. These decisions are load-bearing: changing them likely requires re-evaluating multiple downstream design files.
+
+| Item | Decision | Notes |
+|------|----------|-------|
+| Distribution format | Claude Code plugin (`ccw`) hosted on GitHub | Single-repo plugin + marketplace; no separate hosting needed |
+| Plugin name | `ccw` | Skills are namespaced as `/ccw:<skill>` (e.g., `/ccw:start`, `/ccw:design`) |
+| Version strategy | Explicit semver in `plugin.json`, manually bumped per release | Updates only roll out to other machines when version is bumped |
+| Skill structure | Hybrid (orchestrator + per-phase sub-skills) | Each phase can be invoked independently and reused |
+| Progress state storage | `.claude/workflow/<feature-name>/state.json` | Local metadata in the consuming project; gitignored |
+| Artifact storage (default) | `docs/features/<feature-name>/` | Treats design and plan documents as git-tracked assets |
+| Artifact location prompt | Asked each time | Allows external destinations such as Confluence |
+| Autonomy level | User confirmation at every phase transition | Ensures the user can add input before progressing |
+| AI review tool | Instructs the user to run `/ultrareview` | The skill cannot invoke `/ultrareview` itself |
+| PR creation tool | `gh pr create` | Uses the standard Claude Code PR protocol |
+| Per-phase verification commands | Asked once on first run, stored in `config.json` | Reused across the same feature |
