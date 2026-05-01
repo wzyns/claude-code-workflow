@@ -1,6 +1,17 @@
 # claude-code-workflow
 
-This is my personal Claude Code workflow for developing a feature, packaged as a plugin (`ccw`) so I can use it across machines. It guides feature work through 8 phases: design → document → plan → implement → verify → AI review → user review → PR.
+This is my personal Claude Code workflow for developing a feature, packaged as a plugin (`ccw`) so I can use it across machines. It guides feature work through 8 phases:
+
+1. **Design** — Talk through the feature in conversation to clarify requirements, constraints, alternatives, and trade-offs. Produces an agreed summary, not yet a document.
+2. **Document** — Turn the agreed design into a polished markdown doc (default `docs/features/<name>/design.md`, or an external destination like Confluence).
+3. **Plan** — Decompose the work into independently verifiable steps, each with an objective, scope, and verification method. On first run, captures the project's `test`/`lint` commands and creates the feature branch.
+4. **Implement** — Carry out the plan one step at a time. Each step is a mini-cycle: implement → run unit tests → user review → commit. One commit per approved step keeps the PR easy to read.
+5. **Verify** — Run integration-level checks against the complete implementation (integration tests, full suite, lint, type check) and diagnose/fix any failures.
+6. **AI review** — Ask the user to run `/ultrareview`, then summarize the feedback together, decide which items to address, and apply changes.
+7. **User review** — Present a structured summary of all changes for a final human review, and apply any last feedback before the change becomes externally visible.
+8. **PR** — Create the pull request following Claude Code's PR protocol, then add development notes (trade-offs, known limitations, follow-ups) as PR comments so reviewers get the accumulated context.
+
+You can run the full orchestrator (`/ccw:start`) which walks you through every phase and confirms before each transition, or invoke any single phase directly.
 
 ## Install
 
