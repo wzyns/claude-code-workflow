@@ -36,7 +36,6 @@ Create the pull request and capture the workflow's accumulated context as PR com
    - Push `pr` into `completed_phases`
    - Set `current_phase = "done"`
    - Set `artifacts.pr_url` to the created PR URL
-   - Update `updated_at`
 5. **Report the PR URL** to the user as the final output.
 
 ## Output

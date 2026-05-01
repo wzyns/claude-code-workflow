@@ -28,7 +28,6 @@ Give the user a structured opportunity to review the change before it becomes ex
    - Re-run `config.test_command` to make sure nothing broke
    - Re-summarize the affected portion
 5. Repeat steps 3–4 until the user explicitly approves moving to PR creation.
-6. Update state.json `updated_at`.
 
 ## Output
 - Final code that the user has approved

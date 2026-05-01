@@ -8,7 +8,6 @@ The orchestrator and each sub-skill persist progress in `.claude/workflow/<featu
 {
   "feature_name": "user-auth",
   "started_at": "2026-05-01T10:00:00Z",
-  "updated_at": "2026-05-01T15:30:00Z",
   "current_phase": "implement",
   "completed_phases": ["design", "document", "plan"],
   "config": {

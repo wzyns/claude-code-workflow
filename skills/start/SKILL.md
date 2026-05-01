@@ -18,7 +18,7 @@ Each phase corresponds to a sub-skill: `ccw:design`, `ccw:document`, `ccw:plan`,
 ## Step 1 — Detect existing workflows
 
 1. Look in the current project for any `.claude/workflow/<feature-name>/state.json` files.
-2. If one or more exist, list them with their `feature_name`, `current_phase`, and `updated_at`.
+2. If one or more exist, list them with their `feature_name` and `current_phase`.
 3. Ask the user:
    - "Resume one of these?" (let them pick by name)
    - "Or start a new feature?"
@@ -34,7 +34,6 @@ Each phase corresponds to a sub-skill: `ccw:design`, `ccw:document`, `ccw:plan`,
    {
      "feature_name": "<name>",
      "started_at": "<ISO 8601 timestamp now>",
-     "updated_at": "<same timestamp>",
      "current_phase": "design",
      "completed_phases": [],
      "config": {},
@@ -58,7 +57,6 @@ Repeat until `current_phase == "done"`:
    b. If the sub-skill reports its phase is complete, update `state.json`:
       - Push `current_phase` into `completed_phases`
       - Set `current_phase` to the next phase in the order
-      - Update `updated_at` to the current ISO 8601 timestamp
    c. **Summarize** what just completed (the artifact produced, key decisions, any notes).
    d. **Ask the user**:
       - "Anything you'd like to revise before moving on to `<next-phase>`?"
@@ -70,7 +68,6 @@ Repeat until `current_phase == "done"`:
 
 ## State management rules
 
-- **Always** update `updated_at` whenever you write `state.json`.
 - **Never** perform phase work yourself. Delegate to the sub-skill.
 - If a sub-skill reports incomplete or fails, leave `current_phase` unchanged and surface the failure to the user.
 - If `state.json` is malformed when reading, surface the issue to the user before doing anything destructive.

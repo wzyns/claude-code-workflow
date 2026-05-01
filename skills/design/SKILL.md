@@ -25,7 +25,6 @@ You are facilitating the **design** phase. The goal is to clarify *what* the fea
 
 ## Output
 - `state.json.notes` accumulated with design agreements
-- `updated_at` refreshed on every state.json write
 
 ## Exit condition
 The user signals "design complete", "let's move on", or otherwise approves moving to the next phase.

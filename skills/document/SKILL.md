@@ -31,7 +31,6 @@ Turn the notes accumulated during the `design` phase into a polished, self-conta
 6. Update state.json:
    - `config.design_doc_path` = saved path (or set `config.design_doc_external` for external)
    - `artifacts.design_doc` = same value
-   - `updated_at` refreshed
 
 ## Output
 - A markdown design document, saved or printed

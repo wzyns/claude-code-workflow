@@ -17,7 +17,7 @@ Execute the plan one implementation step at a time. Each step is a mini-cycle th
 
 For each `implementation_step` in order (where `status != "done"`):
 
-1. **Mark the step as `in_progress`** in state.json. Update `updated_at`.
+1. **Mark the step as `in_progress`** in state.json.
 2. **Implement** the code for the step. Stay strictly within the scope of the step.
 3. **Verify**:
    - Write or update unit tests for the new behavior.

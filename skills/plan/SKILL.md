@@ -36,7 +36,6 @@ Decompose the design into a sequence of small, independently verifiable steps th
    - `config.plan_doc_path` = saved path
    - `artifacts.plan_doc` = same
    - `artifacts.implementation_steps` = list of `{step, description, status: "pending"}` derived from the plan headings
-   - `updated_at` refreshed
 
 ## Output
 - A markdown plan document

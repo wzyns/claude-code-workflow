@@ -23,7 +23,6 @@ Get an automated AI review of the implementation and decide which feedback to ap
 5. **Apply changes** for items to address. After each fix:
    - Re-run `config.test_command` to make sure nothing broke
 6. Summarize what was addressed and what was intentionally skipped.
-7. Update state.json `updated_at`.
 
 ## Output
 - Code changes addressing review feedback

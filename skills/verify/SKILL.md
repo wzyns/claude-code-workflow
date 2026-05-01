@@ -25,7 +25,6 @@ Run integration-level checks against the complete implementation. Per-step unit 
    - Which checks ran and passed
    - Any fixes applied during this phase
 6. Confirm with the user that verification is complete.
-7. Update state.json `updated_at`.
 
 ## Output
 - Verification report (text summary to the user)
