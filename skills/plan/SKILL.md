@@ -27,10 +27,10 @@ Decompose the design into a sequence of small, independently verifiable steps th
    - `lint_command` (optional, e.g., `npm run lint`)
    - `integration_test_command` (used in `verify` phase)
 6. **Branch creation**:
-   - Propose a branch name (default `feature/<feature-name>`)
-   - Confirm with the user
-   - Run `git checkout -b <branch-name>`
-   - Save to `state.json.config.branch_name`
+   - Check the project's `CLAUDE.md` and recent `git log` / `git branch` for an established branch-name convention. If found, follow it.
+   - Otherwise, propose `feature/<feature-name>` as the default.
+   - Confirm the chosen name with the user before running `git checkout -b <branch-name>`.
+   - Save to `state.json.config.branch_name`.
 7. Ask the user to review the plan. Iterate on feedback.
 8. Update state.json:
    - `config.plan_doc_path` = saved path

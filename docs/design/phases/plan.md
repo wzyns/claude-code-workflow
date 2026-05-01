@@ -17,7 +17,9 @@ Decompose the implementation into well-defined, independently verifiable steps.
    - Verification method (unit test outline, etc.)
 3. Ask the user to review and approve.
 4. On first run, ask for verification commands (`test`, `lint`, etc.) and persist them to `config.json`.
-5. Create a branch (decide `branch_name` and run `git checkout -b`).
+5. Create a branch:
+   - Infer the project's branch-name convention from `CLAUDE.md` and recent git history; fall back to `feature/<feature-name>`.
+   - Confirm the name with the user, then run `git checkout -b`.
 
 ## Output
 
