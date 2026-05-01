@@ -1,10 +1,10 @@
 ---
-description: Fourth phase of the ccw workflow. Carry out the plan one step at a time, with implement → review → unit-test cycles per step. Updates state.json with step statuses. Use this when the user invokes /ccw:implement directly, or when the orchestrator (/ccw:start) delegates the implement phase.
+description: Fourth phase of the ccw workflow. Carry out the plan one step at a time. Each step is a mini-cycle: implement → unit test → user review → (commit on approval / revise on rejection). Updates state.json with step statuses. Use this when the user invokes /ccw:implement directly, or when the orchestrator (/ccw:start) delegates the implement phase.
 ---
 
 # /ccw:implement — Step-by-step Implementation
 
-Execute the plan one implementation step at a time. Each step is its own mini-cycle: implement → self-review → unit test.
+Execute the plan one implementation step at a time. Each step is a mini-cycle that ends in a commit only when the user approves the diff.
 
 ## Inputs
 - `state.json.artifacts.implementation_steps`
@@ -12,30 +12,34 @@ Execute the plan one implementation step at a time. Each step is its own mini-cy
 - `state.json.config.lint_command` (optional)
 - The plan document at `state.json.config.plan_doc_path`
 
-## Procedure
+## Per-step procedure
 
 For each `implementation_step` in order (where `status != "done"`):
 
 1. **Mark the step as `in_progress`** in state.json. Update `updated_at`.
 2. **Implement** the code for the step. Stay strictly within the scope of the step.
-3. **Self-review** the change. Re-read the diff and check for:
-   - Correctness (does it match the step's objective?)
-   - Edge cases
-   - Style consistency with surrounding code
-   - Anything that should have a test but doesn't
-4. **Write unit tests** for the new behavior.
-5. **Run the test command** (`config.test_command`). Iterate until tests pass.
-6. **Run the lint command** if configured. Fix any issues.
-7. **Mark the step as `done`** in state.json.
-8. **Report to the user**:
-   - What was implemented
-   - What tests cover it
-   - Anything noteworthy
-   - Confirm before moving to the next step
+3. **Verify**:
+   - Write or update unit tests for the new behavior.
+   - Run `config.test_command` and iterate until tests pass.
+   - Run `config.lint_command` if configured. Fix any issues.
+4. **Present for user review**:
+   - Summarize what changed (files touched, behavior added).
+   - Show or describe the diff at a level the user can react to.
+   - Note any tests added and confirm they pass.
+   - Explicitly ask: "Approve this step (commit), or request changes?"
+5. **Branch on the user's response:**
+   - **Approved** →
+     - Create a commit containing only the changes for this step. Follow whatever commit-message conventions the consuming repo already uses (read recent `git log` to infer them); do not impose a format from this skill.
+     - Mark the step as `done` in state.json.
+     - Proceed to the next step (back to procedure 1 with the next step).
+   - **Not approved** →
+     - Capture the requested changes verbatim.
+     - Return to procedure 2 (implement) for the same step. Do **not** commit. Keep the step at `in_progress`.
+     - When the rework is ready, present for review again (procedure 4).
 
 ## Output
-- Code changes
-- Unit tests
+- One commit per approved step
+- Code changes and unit tests on the feature branch
 - `state.json.artifacts.implementation_steps[].status` updated through the lifecycle
 
 ## Exit condition
@@ -49,7 +53,9 @@ If a step reveals that the plan is wrong (e.g., a chosen approach doesn't work, 
 4. Don't silently expand the step's scope.
 
 ## What NOT to do
+- Don't commit before the user approves the step.
 - Don't skip the test/lint loop — even for "trivial" steps.
-- Don't move to the next step without user confirmation.
+- Don't move to the next step without user approval of the current one.
 - Don't refactor surrounding code unless it's required for the step.
-- Don't batch multiple steps into one report — report per step so the user can intervene cleanly.
+- Don't batch multiple steps into one commit — one commit per approved step.
+- Don't mark a step `done` while it's still in a rework loop; only after the commit is created.

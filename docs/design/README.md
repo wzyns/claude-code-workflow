@@ -13,7 +13,7 @@ The workflow consists of 8 phases:
 | 1 | `/ccw:design` | Design the feature through dialogue with the user |
 | 2 | `/ccw:document` | Write the agreed-upon design as a markdown document |
 | 3 | `/ccw:plan` | Decompose the implementation into well-defined steps |
-| 4 | `/ccw:implement` | For each step: [implement → review → unit test], iterating |
+| 4 | `/ccw:implement` | For each step: [implement → unit test → user review → commit], iterating |
 | 5 | `/ccw:verify` | Run integration tests and other checks against the full implementation |
 | 6 | `/ccw:ai-review` | AI-driven code review (e.g., `/ultrareview`) |
 | 7 | `/ccw:user-review` | The user personally reviews all changes |

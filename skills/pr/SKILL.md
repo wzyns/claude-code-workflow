@@ -52,3 +52,4 @@ PR is created and the workflow is marked complete.
 - Don't create the PR while there are uncommitted changes — commit first or ask the user.
 - Don't skip the PR-comments step — those notes are why the workflow accumulated context in the first place.
 - Don't push to `main`/`master` directly. Always use the feature branch.
+- Don't squash the per-step commits from `/ccw:implement` by default — preserve them as separate commits so reviewers can step through the implementation history.

@@ -32,3 +32,4 @@ Create the pull request and capture relevant development notes as PR comments.
 ## Notes
 
 - The PR comments are where the workflow's accumulated context (notes from prior phases, AI-review trade-offs, etc.) finally meets the human reviewer. Treat this step seriously.
+- Preserve the per-step commits from the `implement` phase. Do not squash by default — the step-by-step history is part of the PR's value to reviewers.
