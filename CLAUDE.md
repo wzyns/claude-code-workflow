@@ -87,7 +87,7 @@ Or `/reload-plugins` inside an active Claude Code session to pick up edits witho
 
 - **Add a new phase**: update `docs/design/02-architecture.md`, add `docs/design/phases/<new>.md`, update transitions and state values, then add `skills/<new>/SKILL.md`.
 - **Change a phase's behavior**: edit `docs/design/phases/<phase>.md`, then `skills/<phase>/SKILL.md`.
-- **Cut a release**: bump `version` in `.claude-plugin/plugin.json`, commit, push.
+- **Cut a release**: bump `version` in `.claude-plugin/plugin.json` according to the versioning policy in [docs/design/04-distribution.md](docs/design/04-distribution.md).
 
 ## What lives elsewhere (not in this repo)
 
