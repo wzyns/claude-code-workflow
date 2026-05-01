@@ -83,6 +83,10 @@ claude --plugin-dir /path/to/this/repo
 
 Or `/reload-plugins` inside an active Claude Code session to pick up edits without restarting.
 
+## Commit message convention
+
+Prefix every commit message subject with `[#<issue_number>] ` to track the related issue. Example: `[#1] Add commit message convention to CLAUDE.md`. If you don't know the issue number, ask the user before committing.
+
 ## Common tasks
 
 - **Add a new phase**: update `docs/design/02-architecture.md`, add `docs/design/phases/<new>.md`, update transitions and state values, then add `skills/<new>/SKILL.md`.
