@@ -11,8 +11,15 @@ The orchestrator is the canonical entry point for the workflow. It walks the use
 
 ## Behavior
 
-1. Discover any in-progress workflows under `.claude/ccw/`.
-2. If one or more exist → ask the user whether to resume one or start a new one.
+1. Discover existing workflows by reading each `.claude/ccw/<name>/state.json`. Classify every entry into one of three buckets:
+   - **in-progress** — parses cleanly and `current_phase != "done"`
+   - **done** — parses cleanly and `current_phase == "done"`
+   - **broken** — `state.json` is missing, unreadable, unparseable, or lacks a usable `current_phase`
+2. Decide what to surface:
+   - **Done** workflows are silently excluded; never mention them.
+   - **Broken** entries are reported on a single separate warning line (e.g., `Warning: skipped N broken workflow state(s): <paths>`), but never offered for resume.
+   - If one or more **in-progress** workflows exist → ask the user whether to resume one or start a new one.
+   - If zero in-progress workflows remain, proceed straight to the new-feature flow without prompting.
 3. If starting new → ask for:
    - Feature name (used as the workflow directory name)
    - High-level idea (one or two sentences for context)
