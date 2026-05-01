@@ -1,6 +1,6 @@
 ---
 name: start
-description: Orchestrate the ccw feature development workflow. Walks the user through 8 phases (design → document → plan → implement → verify → ai-review → user-review → pr), invokes the corresponding sub-skill for each phase, manages state in .claude/workflow/<feature>/state.json, and confirms every phase transition with the user. Use this when the user says "start a new feature", "begin a workflow", or runs /ccw:start.
+description: Orchestrate the ccw feature development workflow. Walks the user through 8 phases (design → document → plan → implement → verify → ai-review → user-review → pr), invokes the corresponding sub-skill for each phase, manages state in .claude/ccw/<feature>/state.json, and confirms every phase transition with the user. Use this when the user says "start a new feature", "begin a workflow", or runs /ccw:start.
 ---
 
 # /ccw:start — Orchestrator
@@ -17,19 +17,26 @@ Each phase corresponds to a sub-skill: `ccw:design`, `ccw:document`, `ccw:plan`,
 
 ## Step 1 — Detect existing workflows
 
-1. Look in the current project for any `.claude/workflow/<feature-name>/state.json` files.
-2. If one or more exist, list them with their `feature_name` and `current_phase`.
-3. Ask the user:
+1. Find every `.claude/ccw/<feature-name>/state.json` in the current project.
+2. Classify each entry:
+   - **in-progress** — file parses as JSON and `current_phase` is a non-`"done"` value
+   - **done** — file parses as JSON and `current_phase == "done"`
+   - **broken** — file is missing, unreadable, unparseable, or has no usable `current_phase`
+3. **Silently drop done entries.** Never mention them to the user.
+4. If any **broken** entries exist, print a single warning line listing their paths — e.g.,
+   `Warning: skipped N broken workflow state(s): <path1>, <path2>`.
+   Do **not** offer them for resume.
+5. If one or more **in-progress** entries exist, list them with their `feature_name` and `current_phase`, then ask:
    - "Resume one of these?" (let them pick by name)
    - "Or start a new feature?"
-4. If none exist, proceed to Step 2.
+6. If zero **in-progress** entries remain, proceed straight to Step 2 without prompting. Do not say "no workflows found" when only done workflows exist — just move on.
 
 ## Step 2 — Start a new feature (if applicable)
 
 1. Ask the user for:
    - **Feature name** (kebab-case, e.g., `user-auth`). This becomes the workflow directory name.
    - **One- or two-sentence description** of the feature.
-2. Create `.claude/workflow/<feature-name>/state.json` with:
+2. Create `.claude/ccw/<feature-name>/state.json` with:
    ```json
    {
      "feature_name": "<name>",
@@ -81,6 +88,6 @@ The user may have additional input at any phase boundary. Always pause and ask b
 If the user indicates they want to pause (e.g., "stop", "I'll come back later"):
 
 1. Make sure `state.json` reflects the latest progress.
-2. Confirm where state is saved (path under `.claude/workflow/<feature-name>/`).
+2. Confirm where state is saved (path under `.claude/ccw/<feature-name>/`).
 3. Tell the user how to resume: "Run `/ccw:start` again and select this feature."
 4. Exit.

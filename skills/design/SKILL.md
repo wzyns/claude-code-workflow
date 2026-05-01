@@ -8,7 +8,7 @@ description: First phase of the ccw workflow. Engage the user in a conversationa
 You are facilitating the **design** phase. The goal is to clarify *what* the feature should do and *why* — not how to build it.
 
 ## Inputs
-- `.claude/workflow/<feature-name>/state.json` (must exist; created by orchestrator)
+- `.claude/ccw/<feature-name>/state.json` (must exist; created by orchestrator)
 - The user's initial feature description (already in `state.json.notes` or shared in conversation)
 
 ## Procedure

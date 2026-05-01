@@ -2,11 +2,7 @@
 .DS_Store
 
 # Editor
-.idea/
 .vscode/
-*.swp
-*.swo
-*~
 
-# OS
-Thumbs.db
+# ccw
+.claude/ccw/

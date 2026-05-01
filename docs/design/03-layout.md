@@ -21,7 +21,6 @@ claude-code-workflow/
 │       ├── 04-distribution.md
 │       ├── 05-state.md
 │       ├── 06-transitions.md
-│       ├── 07-open-items.md
 │       └── phases/
 │           ├── start.md
 │           ├── design.md
@@ -46,20 +45,14 @@ claude-code-workflow/
 
 ## Per-Feature Workflow Working Directory (in the consuming project)
 
-Created by the plugin inside whatever project is using it.
+Created by the plugin inside whatever project is using it. By default, both metadata and artifacts live under the same directory:
 
 ```
-.claude/workflow/<feature-name>/
+.claude/ccw/<feature-name>/
 ├── state.json    # Progress state
-└── config.json   # Verification commands and other settings
+├── config.json   # Verification commands and other settings
+├── design.md     # Default location for the design document
+└── plan.md       # Default location for the plan document
 ```
 
-## Artifact Directory (Default, in the consuming project)
-
-```
-docs/features/<feature-name>/
-├── design.md
-└── plan.md
-```
-
-> When the user chooses an external destination (e.g., Confluence), the skill outputs the markdown body and the user publishes it to the external system. The external location (URL, description, etc.) is recorded in `state.json` under `design_doc_external`.
+> When the user chooses an external destination (e.g., Confluence) for `design.md` or `plan.md`, the skill outputs the markdown body and the user publishes it to the external system. The external location (URL, description, etc.) is recorded in `state.json` under `design_doc_external`. In that case `design.md` / `plan.md` may be absent from this directory.

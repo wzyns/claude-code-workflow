@@ -31,7 +31,6 @@ The orchestrator skill `/ccw:start` walks the user through these phases in order
 | [04-distribution.md](04-distribution.md) | How the plugin is published, installed, and updated |
 | [05-state.md](05-state.md) | `state.json` schema and allowed values |
 | [06-transitions.md](06-transitions.md) | Rules for moving between phases |
-| [07-open-items.md](07-open-items.md) | Known gaps and future extensions |
 | [phases/](phases/) | Per-phase specifications (one file per skill) |
 
 ## Per-Phase Specs

@@ -29,7 +29,6 @@ The plugin consists of:
 │       ├── 04-distribution.md
 │       ├── 05-state.md
 │       ├── 06-transitions.md
-│       ├── 07-open-items.md
 │       └── phases/
 │           ├── start.md
 │           ├── design.md
@@ -67,7 +66,6 @@ This convention is intentional. There is no automated build that enforces parity
 - **"What does phase X do?"** → `docs/design/phases/<phase>.md`
 - **"What's the state.json schema?"** → [docs/design/05-state.md](docs/design/05-state.md)
 - **"How is it distributed/installed?"** → [docs/design/04-distribution.md](docs/design/04-distribution.md)
-- **"What's intentionally out of scope?"** → [docs/design/07-open-items.md](docs/design/07-open-items.md)
 
 ## Plugin packaging
 
@@ -83,6 +81,10 @@ claude --plugin-dir /path/to/this/repo
 
 Or `/reload-plugins` inside an active Claude Code session to pick up edits without restarting.
 
+## Commit message convention
+
+Prefix every commit message subject with `[#<issue_number>] ` to track the related issue. Example: `[#1] Add commit message convention to CLAUDE.md`. If you don't know the issue number, ask the user before committing.
+
 ## Common tasks
 
 - **Add a new phase**: update `docs/design/02-architecture.md`, add `docs/design/phases/<new>.md`, update transitions and state values, then add `skills/<new>/SKILL.md`.
@@ -91,10 +93,10 @@ Or `/reload-plugins` inside an active Claude Code session to pick up edits witho
 
 ## What lives elsewhere (not in this repo)
 
-When the `ccw` plugin is *used* (in some other project), it creates:
+When the `ccw` plugin is *used* (in some other project), it creates `.claude/ccw/<feature-name>/` containing:
 
-- `.claude/workflow/<feature-name>/state.json` — progress state for an in-progress feature
-- `.claude/workflow/<feature-name>/config.json` — verification commands for that feature
-- `docs/features/<feature-name>/design.md` and `plan.md` — feature artifacts
+- `state.json` — progress state for an in-progress feature
+- `config.json` — verification commands for that feature
+- `design.md` and `plan.md` — feature artifacts (default location; the user may pick an external destination like Confluence instead)
 
 These paths are mentioned here for context only. They never appear in this repo.
