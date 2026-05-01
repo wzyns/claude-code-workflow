@@ -31,7 +31,7 @@ While the project is in `0.x`, breaking changes only require a **minor** bump (p
 
 ## Marketplace Listing (`.claude-plugin/marketplace.json`)
 
-Declares this repository as a marketplace and lists the single plugin (`ccw`) with `"source": "."`. This lets users add the marketplace once and install the plugin from it.
+Declares this repository as a marketplace and lists the single plugin (`ccw`) with `"source": "./"` (relative paths in marketplace.json must start with `./`). This lets users add the marketplace once and install the plugin from it.
 
 ## Installation (per machine)
 

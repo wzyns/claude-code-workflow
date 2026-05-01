@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "ccw",
-      "source": ".",
+      "source": "./",
       "description": "Guided 8-phase feature development workflow",
       "version": "0.1.0"
     }
