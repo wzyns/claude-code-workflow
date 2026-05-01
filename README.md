@@ -9,6 +9,7 @@ In Claude Code:
 ```
 /plugin marketplace add wzyns/claude-code-workflow
 /plugin install ccw@claude-code-workflow
+/reload-plugins
 ```
 
 ## Usage
@@ -33,6 +34,7 @@ When a new version is released:
 ```
 /plugin marketplace update claude-code-workflow
 /plugin update
+/reload-plugins
 ```
 
 ## Docs
