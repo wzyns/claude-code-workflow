@@ -18,7 +18,7 @@ Decompose the design into a sequence of small, independently verifiable steps th
    - Have a clear objective
    - Have a bounded scope of changes
    - Be independently verifiable (you should be able to describe the unit test up front)
-3. **Ask the user where to save the plan** (default `docs/features/<feature-name>/plan.md`).
+3. **Ask the user where to save the plan** (default `.claude/ccw/<feature-name>/plan.md`).
 4. Write the plan as a markdown document. Suggested structure:
    - Each step gets a heading: `## Step N: <objective>`
    - Under each: scope, files affected, verification method

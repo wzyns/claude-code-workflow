@@ -14,7 +14,7 @@ Strict semver is awkward for an agentic plugin because behavior is partly non-de
 
 - Slash command names and arguments
 - `state.json` and `config.json` schemas (fields, names, allowed values)
-- Artifact paths and formats (e.g., `docs/features/<name>/design.md`)
+- Artifact paths and formats (e.g., `.claude/ccw/<name>/design.md`)
 - Phase list and phase order
 
 A change that removes/renames any of the above, or that breaks resuming an in-progress workflow created by an older version, is a **major** bump.

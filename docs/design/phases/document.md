@@ -10,7 +10,7 @@ Turn the agreements from the `design` phase into a polished markdown document.
 
 ## Behavior
 
-1. Ask for the storage location (default `docs/features/<name>/design.md`, or external such as Confluence).
+1. Ask for the storage location (default `.claude/ccw/<name>/design.md`, or external such as Confluence).
 2. Write the markdown document.
 3. Ask the user to review and incorporate feedback.
 

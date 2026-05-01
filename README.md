@@ -3,7 +3,7 @@
 This is my personal Claude Code workflow for developing a feature, packaged as a plugin (`ccw`) so I can use it across machines. It guides feature work through 8 phases:
 
 1. **Design** — Talk through the feature in conversation to clarify requirements, constraints, alternatives, and trade-offs. Produces an agreed summary, not yet a document.
-2. **Document** — Turn the agreed design into a polished markdown doc (default `docs/features/<name>/design.md`, or an external destination like Confluence).
+2. **Document** — Turn the agreed design into a polished markdown doc (default `.claude/ccw/<name>/design.md`, or an external destination like Confluence).
 3. **Plan** — Decompose the work into independently verifiable steps, each with an objective, scope, and verification method. On first run, captures the project's `test`/`lint` commands and creates the feature branch.
 4. **Implement** — Carry out the plan one step at a time. Each step is a mini-cycle: implement → run unit tests → user review → commit. One commit per approved step keeps the PR easy to read.
 5. **Verify** — Run integration-level checks against the complete implementation (integration tests, full suite, lint, type check) and diagnose/fix any failures.
