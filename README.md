@@ -38,6 +38,21 @@ The orchestrator walks you through each phase and confirms with you before trans
 /ccw:verify /ccw:ai-review /ccw:user-review /ccw:pr
 ```
 
+## Workflow state
+
+When you run `ccw` in a project, it creates `.claude/ccw/<feature>/` with:
+
+- `state.json` — progress state, changes frequently
+- `config.json` — verification commands and other settings
+
+To keep this metadata out of git, add the following to your `.gitignore`:
+
+```
+.claude/ccw/
+```
+
+If you'd rather track it (to share workflow state with a team or resume on another machine), leave it as is. `ccw` does not modify your `.gitignore`.
+
 ## Update
 
 When a new version is released:
