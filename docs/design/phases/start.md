@@ -7,11 +7,11 @@ The orchestrator is the canonical entry point for the workflow. It walks the use
 ## Input
 
 - The user's invocation of `/ccw:start`
-- Optionally an existing `.claude/workflow/<name>/state.json` (resume case)
+- Optionally an existing `.claude/ccw/<name>/state.json` (resume case)
 
 ## Behavior
 
-1. Discover any in-progress workflows under `.claude/workflow/`.
+1. Discover any in-progress workflows under `.claude/ccw/`.
 2. If one or more exist → ask the user whether to resume one or start a new one.
 3. If starting new → ask for:
    - Feature name (used as the workflow directory name)

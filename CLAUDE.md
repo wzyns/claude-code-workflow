@@ -95,8 +95,8 @@ Prefix every commit message subject with `[#<issue_number>] ` to track the relat
 
 When the `ccw` plugin is *used* (in some other project), it creates:
 
-- `.claude/workflow/<feature-name>/state.json` — progress state for an in-progress feature
-- `.claude/workflow/<feature-name>/config.json` — verification commands for that feature
+- `.claude/ccw/<feature-name>/state.json` — progress state for an in-progress feature
+- `.claude/ccw/<feature-name>/config.json` — verification commands for that feature
 - `docs/features/<feature-name>/design.md` and `plan.md` — feature artifacts
 
 These paths are mentioned here for context only. They never appear in this repo.

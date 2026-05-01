@@ -8,7 +8,7 @@ This file captures the design decisions made for `ccw` and the reasoning behind 
 | Plugin name | `ccw` | Skills are namespaced as `/ccw:<skill>` (e.g., `/ccw:start`, `/ccw:design`) |
 | Version strategy | Explicit semver in `plugin.json`, manually bumped per release | Updates only roll out to other machines when version is bumped |
 | Skill structure | Hybrid (orchestrator + per-phase sub-skills) | Each phase can be invoked independently and reused |
-| Progress state storage | `.claude/workflow/<feature-name>/state.json` | Local metadata in the consuming project; gitignored |
+| Progress state storage | `.claude/ccw/<feature-name>/state.json` | Local metadata in the consuming project; gitignored |
 | Artifact storage (default) | `docs/features/<feature-name>/` | Treats design and plan documents as git-tracked assets |
 | Artifact location prompt | Asked each time | Allows external destinations such as Confluence |
 | Autonomy level | User confirmation at every phase transition | Ensures the user can add input before progressing |

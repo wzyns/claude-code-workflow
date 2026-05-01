@@ -1,6 +1,6 @@
 # State Management (`state.json`)
 
-The orchestrator and each sub-skill persist progress in `.claude/workflow/<feature-name>/state.json` within the consuming project. The schema below is the contract between phases.
+The orchestrator and each sub-skill persist progress in `.claude/ccw/<feature-name>/state.json` within the consuming project. The schema below is the contract between phases.
 
 ## Schema
 

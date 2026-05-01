@@ -48,7 +48,7 @@ claude-code-workflow/
 Created by the plugin inside whatever project is using it.
 
 ```
-.claude/workflow/<feature-name>/
+.claude/ccw/<feature-name>/
 ├── state.json    # Progress state
 └── config.json   # Verification commands and other settings
 ```
