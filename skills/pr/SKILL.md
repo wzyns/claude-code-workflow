@@ -1,4 +1,5 @@
 ---
+name: pr
 description: Eighth and final phase of the ccw workflow. Create the pull request following Claude Code's PR protocol, then add development notes (trade-offs, known limitations, follow-ups) as PR comments. Sets state.json.current_phase to done. Use this when the user invokes /ccw:pr directly, or when the orchestrator (/ccw:start) delegates the PR phase.
 ---
 

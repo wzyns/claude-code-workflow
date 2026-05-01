@@ -1,4 +1,5 @@
 ---
+name: plan
 description: Third phase of the ccw workflow. Decompose the implementation into well-defined, independently verifiable steps. Captures verification commands (test, lint) on first run into config.json, and creates the feature branch. Use this when the user invokes /ccw:plan directly, or when the orchestrator (/ccw:start) delegates the plan phase.
 ---
 

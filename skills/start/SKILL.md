@@ -1,4 +1,5 @@
 ---
+name: start
 description: Orchestrate the ccw feature development workflow. Walks the user through 8 phases (design → document → plan → implement → verify → ai-review → user-review → pr), invokes the corresponding sub-skill for each phase, manages state in .claude/workflow/<feature>/state.json, and confirms every phase transition with the user. Use this when the user says "start a new feature", "begin a workflow", or runs /ccw:start.
 ---
 

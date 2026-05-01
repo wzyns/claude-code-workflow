@@ -1,4 +1,5 @@
 ---
+name: document
 description: Second phase of the ccw workflow. Turn the agreed design from the design phase into a polished markdown document. Asks the user where to save it (default docs/features/<feature>/design.md, or an external destination like Confluence). Use this when the user invokes /ccw:document directly, or when the orchestrator (/ccw:start) delegates the document phase.
 ---
 

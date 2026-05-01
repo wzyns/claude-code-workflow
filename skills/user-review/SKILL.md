@@ -1,4 +1,5 @@
 ---
+name: user-review
 description: Seventh phase of the ccw workflow. Present a structured summary of all changes to the user for final review before opening a PR, then apply additional changes based on their feedback. Use this when the user invokes /ccw:user-review directly, or when the orchestrator (/ccw:start) delegates the user review phase.
 ---
 

@@ -1,4 +1,5 @@
 ---
+name: ai-review
 description: Sixth phase of the ccw workflow. Get an AI review by asking the user to run /ultrareview, then summarize the results, decide together which items to address, and apply changes. Use this when the user invokes /ccw:ai-review directly, or when the orchestrator (/ccw:start) delegates the AI review phase.
 ---
 

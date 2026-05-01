@@ -1,4 +1,5 @@
 ---
+name: verify
 description: Fifth phase of the ccw workflow. Run integration-level checks against the complete implementation — integration tests, full test suite, lint, type check — and diagnose/fix failures. Use this when the user invokes /ccw:verify directly, or when the orchestrator (/ccw:start) delegates the verify phase.
 ---
 

@@ -1,4 +1,5 @@
 ---
+name: implement
 description: Fourth phase of the ccw workflow. Carry out the plan one step at a time. Each step is a mini-cycle: implement → unit test → user review → (commit on approval / revise on rejection). Updates state.json with step statuses. Use this when the user invokes /ccw:implement directly, or when the orchestrator (/ccw:start) delegates the implement phase.
 ---
 

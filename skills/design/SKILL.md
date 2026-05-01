@@ -1,4 +1,5 @@
 ---
+name: design
 description: First phase of the ccw workflow. Engage the user in a conversational design discussion about the feature — clarify requirements, constraints, alternatives, and trade-offs. Accumulate agreed points as notes in state.json. Use this when the user invokes /ccw:design directly, or when the orchestrator (/ccw:start) delegates the design phase.
 ---
 
