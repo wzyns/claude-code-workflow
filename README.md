@@ -1,6 +1,6 @@
 # claude-code-workflow
 
-A Claude Code plugin (`ccw`) that turns feature development into a guided 8-phase workflow: design → document → plan → implement → verify → AI review → user review → PR.
+This is my personal Claude Code workflow for developing a feature, packaged as a plugin (`ccw`) so I can use it across machines. It guides feature work through 8 phases: design → document → plan → implement → verify → AI review → user review → PR.
 
 ## Install
 
