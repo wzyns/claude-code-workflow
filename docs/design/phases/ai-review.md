@@ -19,6 +19,7 @@ Get an AI review of the implementation and decide which feedback to apply.
 
 - Code changes addressing review feedback
 - A summary of items addressed and items intentionally skipped (with reasons)
+- Any fix committed during ai-review is appended to `state.json.notes` as `"[AI Review] commit <short-hash>: <subject>"`. Commits created in this run are not re-reviewed in the same run.
 
 ## Exit Condition
 

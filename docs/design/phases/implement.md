@@ -27,6 +27,7 @@ Update `state.json.artifacts.implementation_steps[].status` as steps move from `
 - One commit per approved step
 - Code changes and unit tests
 - Updated `state.json` with step statuses
+- Each commit appended to `state.json.notes` as `"[Implement] commit <short-hash>: <subject>"` so later phases (notably `ai-review`) can locate the changes that belong to this workflow
 
 ## Exit Condition
 

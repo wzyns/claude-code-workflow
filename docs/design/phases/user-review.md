@@ -17,6 +17,7 @@ Give the user a structured opportunity to review the change before opening a PR.
 ## Output
 
 - Final code that the user is comfortable submitting
+- Any fix committed during user-review is appended to `state.json.notes` as `"[User Review] commit <short-hash>: <subject>"`
 
 ## Exit Condition
 

@@ -18,6 +18,7 @@ Run integration-level checks against the complete implementation.
 ## Output
 
 - Verification report (summary of which checks passed/failed and any fixes applied)
+- Any fix committed during verify is appended to `state.json.notes` as `"[Verify] commit <short-hash>: <subject>"` so later phases (notably `ai-review`) can locate the changes that belong to this workflow
 
 ## Exit Condition
 

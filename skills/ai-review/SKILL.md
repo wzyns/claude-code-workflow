@@ -23,6 +23,7 @@ Get an AI review of the implementation and decide which feedback to apply.
    - For "skip" or "defer", record the reason in `state.json.notes`
 5. **Apply changes** for items to address. After each fix:
    - Re-run `config.test_command` to make sure nothing broke
+   - If the fix is committed, append a one-line record to `state.json.notes` in the format `"[AI Review] commit <short-hash>: <subject>"` (use `git log -1 --pretty='%h %s'`). Commits made during the same ai-review run are not re-reviewed in this run.
 6. Summarize what was addressed and what was intentionally skipped.
 
 ## Output
