@@ -6,7 +6,7 @@ Get an AI review of the implementation and decide which feedback to apply.
 
 ## Input
 
-- The completed implementation (preferably committed to the feature branch)
+- The implementation, committed to the feature branch. Uncommitted changes are invisible to the self-review since the review subject is the diffs of the recorded commits.
 
 ## Behavior
 

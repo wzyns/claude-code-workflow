@@ -8,7 +8,7 @@ description: Sixth phase of the ccw workflow. Ask the user only "proceed or skip
 Self-review the commits recorded for this workflow and decide which feedback to apply.
 
 ## Inputs
-- The completed implementation (preferably committed to the feature branch)
+- The implementation, committed to the feature branch. Uncommitted changes are invisible to the self-review since the review subject is the diffs of the recorded commits.
 - `state.json.notes` entries of the form `"[<Phase>] commit <short-hash>: <subject>"` recorded by earlier phases
 
 ## Procedure
