@@ -7,7 +7,7 @@ This is my personal Claude Code workflow for developing a feature, packaged as a
 3. **Plan** — Decompose the work into independently verifiable steps, each with an objective, scope, and verification method. On first run, captures the project's `test`/`lint` commands and creates the feature branch.
 4. **Implement** — Carry out the plan one step at a time. Each step is a mini-cycle: implement → run unit tests → user review → commit. One commit per approved step keeps the PR easy to read.
 5. **Verify** — Run integration-level checks against the complete implementation (integration tests, full suite, lint, type check) and diagnose/fix any failures.
-6. **AI review** — Ask the user to run `/ultrareview`, then summarize the feedback together, decide which items to address, and apply changes.
+6. **AI review** — Ask the user how they want to perform the AI review (self-review, sub-agent, external tool, or skip), then summarize the feedback together, decide which items to address, and apply changes.
 7. **User review** — Present a structured summary of all changes for a final human review, and apply any last feedback before the change becomes externally visible.
 8. **PR** — Create the pull request following Claude Code's PR protocol, then add development notes (trade-offs, known limitations, follow-ups) as PR comments so reviewers get the accumulated context.
 

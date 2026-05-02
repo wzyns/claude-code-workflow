@@ -12,6 +12,6 @@ This file captures the design decisions made for `ccw` and the reasoning behind 
 | Artifact storage (default) | `.claude/ccw/<feature-name>/` | Keeps all per-feature ccw output in one directory; git tracking is the user's choice (see `.gitignore` guidance in README) |
 | Artifact location prompt | Asked each time | Allows external destinations such as Confluence |
 | Autonomy level | User confirmation at every phase transition | Ensures the user can add input before progressing |
-| AI review tool | Instructs the user to run `/ultrareview` | The skill cannot invoke `/ultrareview` itself |
+| AI review tool | Asks the user how to perform the review (no specific tool prescribed) | Lets each run pick the right approach — self-review, sub-agent, external tool, or skip — without locking in a single mechanism |
 | PR creation tool | `gh pr create` | Uses the standard Claude Code PR protocol |
 | Per-phase verification commands | Asked once on first run, stored in `config.json` | Reused across the same feature |

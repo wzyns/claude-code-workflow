@@ -15,7 +15,7 @@ The workflow consists of 8 phases:
 | 3 | `/ccw:plan` | Decompose the implementation into well-defined steps |
 | 4 | `/ccw:implement` | For each step: [implement → unit test → user review → commit], iterating |
 | 5 | `/ccw:verify` | Run integration tests and other checks against the full implementation |
-| 6 | `/ccw:ai-review` | AI-driven code review (e.g., `/ultrareview`) |
+| 6 | `/ccw:ai-review` | AI-driven code review (mechanism chosen at runtime — self-review, sub-agent, external tool, or skip) |
 | 7 | `/ccw:user-review` | The user personally reviews all changes |
 | 8 | `/ccw:pr` | Create the PR, including any noteworthy development notes as PR comments |
 
