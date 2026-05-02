@@ -5,7 +5,7 @@ description: Sixth phase of the ccw workflow. Ask the user how they want to perf
 
 # /ccw:ai-review — AI Review
 
-Get an automated AI review of the implementation and decide which feedback to apply.
+Get an AI review of the implementation and decide which feedback to apply.
 
 ## Inputs
 - The completed implementation (preferably committed to the feature branch)
@@ -30,7 +30,7 @@ Get an automated AI review of the implementation and decide which feedback to ap
 - Entries in `state.json.notes` describing items addressed and items intentionally skipped
 
 ## Exit condition
-The user confirms the AI review feedback has been handled.
+The user confirms the phase is complete (feedback addressed, or skipped).
 
 ## What NOT to do
 - Don't prescribe a specific review tool — ask the user how they want to review.
