@@ -10,8 +10,8 @@ Get an automated AI review of the implementation and decide which feedback to ap
 
 ## Behavior
 
-1. Ask the user to run `/ultrareview` (the skill cannot invoke `/ultrareview` itself).
-2. When the user shares the results, summarize and organize them.
+1. Ask the user how they would like to perform the AI review. No specific tool is prescribed — they may request a self-review by the assistant, delegate to a sub-agent, paste feedback from an external review tool, or skip the phase entirely. Proceed according to their answer.
+2. When review feedback exists, summarize and organize it.
 3. Decide together which items to address vs. ignore.
 4. Apply code changes for items to address.
 
@@ -27,4 +27,4 @@ Get an automated AI review of the implementation and decide which feedback to ap
 ## Notes
 
 - AI review feedback is advisory, not mandatory. Trade-offs should be made explicit.
-- If `/ultrareview` is unavailable in the user's environment, this phase can be skipped — but the user must explicitly opt out.
+- The phase can be skipped — the user just signals skip when asked how they want to review.
