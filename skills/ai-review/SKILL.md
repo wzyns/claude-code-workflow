@@ -18,6 +18,7 @@ Self-review the commits recorded for this workflow and decide which feedback to 
    - On **skip**, record the reason in `state.json.notes` (e.g., `"AI review skipped: <reason>"`) and treat the phase as complete. Stop here.
    - On **proceed**, continue.
 3. **Collect the review subject.** Read `state.json.notes` and extract every line matching `"[<Phase>] commit <short-hash>: <subject>"`. The set of `<short-hash>` values is the review subject. Snapshot this list at the start of the run — fix commits added later are not re-reviewed in the same run.
+   - If the snapshot is empty (no commits have been recorded yet for this workflow), report this to the user and ask whether to skip the phase or wait until commits exist. Do not invent a different review subject.
 4. **Self-review.** For each commit, read its diff (`git show <hash>`) and produce findings. Findings should be grouped by severity (critical, important, nit) with concrete code references (file:line) where possible.
 5. **Summarize** the findings for the user.
 6. **Discuss with the user** which items to address:

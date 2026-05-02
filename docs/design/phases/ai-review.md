@@ -11,7 +11,7 @@ Get an AI review of the implementation and decide which feedback to apply.
 ## Behavior
 
 1. Ask the user only **proceed or skip**.
-   - **proceed**: the assistant self-reviews the commits already recorded in `state.json.notes` for this workflow. The review subject is the union of those commits' diffs; no external tool is invoked.
+   - **proceed**: the assistant self-reviews the commits already recorded in `state.json.notes` for this workflow. The review subject is the union of those commits' diffs; no external tool is invoked. If no commits have been recorded yet, report it to the user and ask whether to skip or wait — do not pick a different review subject.
    - **skip**: record the reason in `state.json.notes` and treat the phase as complete.
 2. Summarize and organize the self-review feedback.
 3. Decide together which items to address vs. ignore.

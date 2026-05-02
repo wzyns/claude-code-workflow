@@ -30,7 +30,7 @@ The orchestrator and each sub-skill persist progress in `.claude/ccw/<feature-na
   },
   "notes": [
     "[Implement] commit abc1234: [#42] Add user schema",
-    "[Verify] commit def5678: [#42] Fix flaky integration test"
+    "[Implement] commit def5678: [#42] Add API endpoints"
   ]
 }
 ```
