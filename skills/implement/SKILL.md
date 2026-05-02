@@ -31,6 +31,7 @@ For each `implementation_step` in order (where `status != "done"`):
 5. **Branch on the user's response:**
    - **Approved** →
      - Create a commit containing only the changes for this step. Follow whatever commit-message conventions the consuming repo already uses (read recent `git log` to infer them); do not impose a format from this skill.
+     - Append a one-line record of the new commit to `state.json.notes` in the format `"[Implement] commit <short-hash>: <subject>"` (use `git log -1 --pretty='%h %s'` for the values). This record is the input ai-review reads later.
      - Mark the step as `done` in state.json.
      - Proceed to the next step (back to procedure 1 with the next step).
    - **Not approved** →

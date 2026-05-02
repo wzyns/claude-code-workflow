@@ -21,6 +21,7 @@ Run integration-level checks against the complete implementation. Per-step unit 
    - Diagnose the root cause
    - Fix it (or surface to the user if the fix isn't obvious)
    - Re-run **all** checks (not just the failing one)
+   - If a fix is committed, append a one-line record to `state.json.notes` in the format `"[Verify] commit <short-hash>: <subject>"` (use `git log -1 --pretty='%h %s'`). This record is the input ai-review reads later.
 5. When all checks pass, summarize for the user:
    - Which checks ran and passed
    - Any fixes applied during this phase

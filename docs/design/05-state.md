@@ -28,9 +28,19 @@ The orchestrator and each sub-skill persist progress in `.claude/ccw/<feature-na
       { "step": 3, "description": "Frontend integration", "status": "pending" }
     ]
   },
-  "notes": []
+  "notes": [
+    "[Implement] commit abc1234: [#42] Add user schema",
+    "[Implement] commit def5678: [#42] Add API endpoints"
+  ]
 }
 ```
+
+## `notes` conventions
+
+`notes` is a free-form append-only log used by the workflow. Two conventions are load-bearing:
+
+- **Commit records.** Phases that create commits (`implement`, `verify`, `ai-review`, `user-review`) append `"[<Phase>] commit <short-hash>: <subject>"` immediately after each commit. `ai-review` reads these to know which commits belong to the workflow.
+- **Decision/skip records.** Free-form notes describing design agreements, items intentionally skipped, etc. No format prescribed.
 
 ## Phase Values
 

@@ -10,15 +10,18 @@ Get an AI review of the implementation and decide which feedback to apply.
 
 ## Behavior
 
-1. Ask the user how they would like to perform the AI review. No specific tool is prescribed — they may request a self-review by the assistant, delegate to a sub-agent, paste feedback from an external review tool, or skip the phase entirely. Proceed according to their answer. If the user chooses to skip, record the reason in `state.json.notes` and treat the phase as complete.
-2. When review feedback exists, summarize and organize it.
+1. Ask the user only **proceed or skip**.
+   - **proceed**: the assistant self-reviews the commits already recorded in `state.json.notes` for this workflow. The review subject is the union of those commits' diffs; no external tool is invoked. If no commits have been recorded yet, report it to the user and ask whether to skip or wait — do not pick a different review subject.
+   - **skip**: record the reason in `state.json.notes` and treat the phase as complete.
+2. Summarize and organize the self-review feedback.
 3. Decide together which items to address vs. ignore.
-4. Apply code changes for items to address.
+4. Apply code changes for items to address. Fix commits made during this run are not re-reviewed in the same run.
 
 ## Output
 
 - Code changes addressing review feedback
 - A summary of items addressed and items intentionally skipped (with reasons)
+- Any fix committed during ai-review is appended to `state.json.notes` as `"[AI Review] commit <short-hash>: <subject>"`. Commits created in this run are not re-reviewed in the same run.
 
 ## Exit Condition
 
@@ -27,4 +30,4 @@ Get an AI review of the implementation and decide which feedback to apply.
 ## Notes
 
 - AI review feedback is advisory, not mandatory. Trade-offs should be made explicit.
-- The phase can be skipped — the user just signals skip when asked how they want to review.
+- The phase can be skipped — the user just answers "skip" at the prompt.
