@@ -55,4 +55,4 @@ Created by the plugin inside whatever project is using it. By default, both meta
 └── plan.md       # Default location for the plan document
 ```
 
-> When the user chooses an external destination (e.g., Confluence) for `design.md` or `plan.md`, the skill outputs the markdown body and the user publishes it to the external system. The external location (URL, description, etc.) is recorded in `state.json` under `design_doc_external`. In that case `design.md` / `plan.md` may be absent from this directory.
+> When the user chooses an external destination (e.g., Confluence) for `design.md` or `plan.md`, the skill first attempts to publish directly using an available tool (MCP server, CLI, etc.). If no such tool is available, it outputs the markdown body for the user to publish manually. The external location (URL, description, etc.) is recorded in `state.json` under `design_doc_external` or `plan_doc_external`. In that case `design.md` / `plan.md` may be absent from this directory.

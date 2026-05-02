@@ -1,6 +1,6 @@
 ---
 name: plan
-description: Third phase of the ccw workflow. Decompose the implementation into well-defined, independently verifiable steps. Captures verification commands (test, lint) on first run into config.json, and creates the feature branch. Use this when the user invokes /ccw:plan directly, or when the orchestrator (/ccw:start) delegates the plan phase.
+description: Third phase of the ccw workflow. Decompose the implementation into well-defined, independently verifiable steps. Asks the user where to save the plan (default .claude/ccw/<feature>/plan.md, or an external destination like Confluence). Captures verification commands (test, lint) on first run into config.json, and creates the feature branch. Use this when the user invokes /ccw:plan directly, or when the orchestrator (/ccw:start) delegates the plan phase.
 ---
 
 # /ccw:plan — Implementation Plan
@@ -18,7 +18,9 @@ Decompose the design into a sequence of small, independently verifiable steps th
    - Have a clear objective
    - Have a bounded scope of changes
    - Be independently verifiable (you should be able to describe the unit test up front)
-3. **Ask the user where to save the plan** (default `.claude/ccw/<feature-name>/plan.md`).
+3. **Ask the user where to save the plan**:
+   - Default: `.claude/ccw/<feature-name>/plan.md`
+   - External destination (Confluence, Notion, etc.) — in this case attempt to publish directly using an available tool (MCP server, CLI, etc.); if none is available, print the markdown body for the user to publish manually
 4. Write the plan as a markdown document. Suggested structure:
    - Each step gets a heading: `## Step N: <objective>`
    - Under each: scope, files affected, verification method
@@ -33,8 +35,8 @@ Decompose the design into a sequence of small, independently verifiable steps th
    - Save to `state.json.config.branch_name`.
 7. Ask the user to review the plan. Iterate on feedback.
 8. Update state.json:
-   - `config.plan_doc_path` = saved path
-   - `artifacts.plan_doc` = same
+   - `config.plan_doc_path` = saved path (or set `config.plan_doc_external` for external)
+   - `artifacts.plan_doc` = same value
    - `artifacts.implementation_steps` = list of `{step, description, status: "pending"}` derived from the plan headings
 
 ## Output

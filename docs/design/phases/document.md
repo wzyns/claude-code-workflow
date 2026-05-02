@@ -26,5 +26,5 @@ Turn the agreements from the `design` phase into a polished markdown document.
 
 ## Notes
 
-- If the user picks an external destination, output the markdown body so they can copy/paste; do not attempt to publish on their behalf.
+- If the user picks an external destination, attempt to publish directly using an available tool (MCP server, CLI, etc.). If no such tool is available, output the markdown body so the user can publish manually.
 - The document should be self-contained enough to onboard a new reader to the feature.

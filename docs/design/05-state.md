@@ -14,6 +14,7 @@ The orchestrator and each sub-skill persist progress in `.claude/ccw/<feature-na
     "design_doc_path": ".claude/ccw/user-auth/design.md",
     "design_doc_external": null,
     "plan_doc_path": ".claude/ccw/user-auth/plan.md",
+    "plan_doc_external": null,
     "test_command": "npm test",
     "lint_command": "npm run lint",
     "integration_test_command": "npm run test:integration",

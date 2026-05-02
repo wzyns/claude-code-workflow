@@ -16,7 +16,7 @@ Turn the notes accumulated during the `design` phase into a polished, self-conta
 1. Read state.json. If `notes` is empty, warn the user and suggest running `/ccw:design` first; do not proceed without their explicit confirmation.
 2. **Ask the user where to save the document**:
    - Default: `.claude/ccw/<feature-name>/design.md`
-   - External destination (Confluence, Notion, etc.) — in this case you will print the markdown body for the user to publish manually
+   - External destination (Confluence, Notion, etc.) — in this case attempt to publish directly using an available tool (MCP server, CLI, etc.); if none is available, print the markdown body for the user to publish manually
 3. Compose the markdown document. Suggested structure:
    - Title (feature name)
    - Goal
@@ -26,7 +26,7 @@ Turn the notes accumulated during the `design` phase into a polished, self-conta
    - Alternatives Considered
    - Trade-offs
    - Open Questions (if any)
-4. Save to the chosen path (or print to chat for an external destination).
+4. Save to the chosen path. For an external destination, publish directly via an available tool (MCP server, CLI, etc.); if no such tool is available, print the markdown body to chat so the user can publish manually.
 5. Ask the user to review. Iterate on feedback until the user approves.
 6. Update state.json:
    - `config.design_doc_path` = saved path (or set `config.design_doc_external` for external)
@@ -40,5 +40,4 @@ The user approves the document.
 
 ## What NOT to do
 - Don't include implementation steps — that's the `plan` phase.
-- Don't auto-publish to external systems on the user's behalf. Output markdown for the user to copy/paste.
 - Don't skip the user-review iteration step — even if the document looks complete on first pass.
