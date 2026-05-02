@@ -85,6 +85,12 @@ Or `/reload-plugins` inside an active Claude Code session to pick up edits witho
 
 Prefix every commit message subject with `[#<issue_number>] ` to track the related issue. Example: `[#1] Add commit message convention to CLAUDE.md`. If you don't know the issue number, ask the user before committing.
 
+## Language convention
+
+Files that ship with the plugin must be written in English: everything under `docs/`, `skills/`, `README.md`, `CLAUDE.md`, and commit messages. The plugin is consumed by users of any locale, so prompts and documentation it emits stay locale-neutral.
+
+Files that are local to a single workflow run — primarily `state.json` and `config.json` under `.claude/ccw/<feature-name>/` of the consuming project — may follow whatever language the user is conversing in. These never ship with the plugin.
+
 ## Common tasks
 
 - **Add a new phase**: update `docs/design/02-architecture.md`, add `docs/design/phases/<new>.md`, update transitions and state values, then add `skills/<new>/SKILL.md`.
