@@ -24,16 +24,16 @@ Decompose the design into a sequence of small, independently verifiable steps th
 4. Write the plan as a markdown document. Suggested structure:
    - Each step gets a heading: `## Step N: <objective>`
    - Under each: scope, files affected, verification method
-5. **On first run, ask the user for verification commands** and persist to `config.json`:
+5. Save to the chosen path, or publish to the external destination via an available tool (MCP server, CLI, etc.); if no such tool is available, print the markdown body so the user can publish manually. Report the saved location to the user — the file path for local saves, or the URL/link for external destinations (or, if external publishing was unavailable and the markdown was printed instead, say so).
+6. **On first run, ask the user for verification commands** and persist to `config.json`:
    - `test_command` (e.g., `npm test`)
    - `lint_command` (optional, e.g., `npm run lint`)
    - `integration_test_command` (used in `verify` phase)
-6. **Branch creation**:
+7. **Branch creation**:
    - Check the project's `CLAUDE.md` and recent `git log` / `git branch` for an established branch-name convention. If found, follow it.
    - Otherwise, propose `feature/<feature-name>` as the default.
    - Confirm the chosen name with the user before running `git checkout -b <branch-name>`.
    - Save to `state.json.config.branch_name`.
-7. Ask the user to review the plan. Iterate on feedback.
 8. Update state.json:
    - `config.plan_doc_path` = saved path (or set `config.plan_doc_external` for external)
    - `artifacts.plan_doc` = same value
@@ -41,14 +41,16 @@ Decompose the design into a sequence of small, independently verifiable steps th
 
 ## Output
 - A markdown plan document
+- A message to the user with the save location (path or link)
 - A new git branch
 - `config.json` populated with verification commands
 
 ## Exit condition
-The user approves the plan.
+The plan is saved (or published) with its location reported, verification commands are captured in `config.json`, and the feature branch is created.
 
 ## What NOT to do
 - Don't start implementing — that's `/ccw:implement`.
 - Don't combine multiple unrelated changes in a single step.
 - Don't create a branch silently — confirm the name with the user first.
 - Don't skip persisting verification commands — they are reused throughout the workflow.
+- Don't ask the user to review or approve the plan content. Reporting where it was saved is the only acknowledgement needed — any revisions come from the orchestrator's phase-transition prompt or a re-invocation of `/ccw:plan`. (Verification commands and the branch name remain confirmation points — those are inputs to the phase, not document content.)

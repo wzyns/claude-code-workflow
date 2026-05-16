@@ -27,17 +27,18 @@ Turn the notes accumulated during the `design` phase into a polished, self-conta
    - Trade-offs
    - Open Questions (if any)
 4. Save to the chosen path. For an external destination, publish directly via an available tool (MCP server, CLI, etc.); if no such tool is available, print the markdown body to chat so the user can publish manually.
-5. Ask the user to review. Iterate on feedback until the user approves.
+5. Report the saved location to the user — the file path for local saves, or the URL/link for external destinations (or, if external publishing was unavailable and the markdown was printed instead, say so).
 6. Update state.json:
    - `config.design_doc_path` = saved path (or set `config.design_doc_external` for external)
    - `artifacts.design_doc` = same value
 
 ## Output
 - A markdown design document, saved or printed
+- A message to the user with the save location (path or link)
 
 ## Exit condition
-The user approves the document.
+The document is saved (or published) and the location has been reported to the user.
 
 ## What NOT to do
 - Don't include implementation steps — that's the `plan` phase.
-- Don't skip the user-review iteration step — even if the document looks complete on first pass.
+- Don't ask the user to review or approve the document content. Reporting where it was saved is the only acknowledgement needed — any revisions come from the orchestrator's phase-transition prompt or a re-invocation of `/ccw:document`.

@@ -16,7 +16,7 @@ Decompose the implementation into well-defined, independently verifiable steps.
    - Scope of changes
    - Verification method (unit test outline, etc.)
 3. Ask for the storage location (default `.claude/ccw/<name>/plan.md`, or external such as Confluence).
-4. Ask the user to review and approve.
+4. Write the plan and save/publish it. Report the saved location to the user — file path for local, URL/link for external destinations.
 5. On first run, ask for verification commands (`test`, `lint`, etc.) and persist them to `config.json`.
 6. Create a branch:
    - Infer the project's branch-name convention from `CLAUDE.md` and recent git history; fall back to `feature/<feature-name>`.
@@ -32,10 +32,11 @@ Decompose the implementation into well-defined, independently verifiable steps.
 
 ## Exit Condition
 
-- The user approves the plan.
+- The plan is saved (or published) with its location reported, verification commands are captured, and the branch is created.
 
 ## Notes
 
 - If the user picks an external destination, attempt to publish directly using an available tool (MCP server, CLI, etc.). If no such tool is available, output the markdown body so the user can publish manually.
 - The plan is a contract for the `implement` phase; bigger ambiguity here means more rework later.
 - Steps should be small enough that each can land as a meaningful unit of progress.
+- Do not ask the user to review the plan content. Reporting the save location is the only user-facing acknowledgement; content review happens at the phase-transition prompt in the orchestrator, and if the skill is invoked directly the user can re-run `/ccw:plan` to revise.

@@ -11,8 +11,8 @@ Turn the agreements from the `design` phase into a polished markdown document.
 ## Behavior
 
 1. Ask for the storage location (default `.claude/ccw/<name>/design.md`, or external such as Confluence).
-2. Write the markdown document.
-3. Ask the user to review and incorporate feedback.
+2. Write the markdown document and save/publish it.
+3. Report the saved location to the user — file path for local, URL/link for external destinations.
 
 ## Output
 
@@ -22,9 +22,10 @@ Turn the agreements from the `design` phase into a polished markdown document.
 
 ## Exit Condition
 
-- The user approves the document.
+- The document is saved (or published to the external destination) and the location reported to the user.
 
 ## Notes
 
 - If the user picks an external destination, attempt to publish directly using an available tool (MCP server, CLI, etc.). If no such tool is available, output the markdown body so the user can publish manually.
 - The document should be self-contained enough to onboard a new reader to the feature.
+- Do not ask the user to review the document content. Reporting the save location is the only user-facing acknowledgement; content review happens at the phase-transition prompt in the orchestrator, and if the skill is invoked directly the user can re-run `/ccw:document` to revise.
