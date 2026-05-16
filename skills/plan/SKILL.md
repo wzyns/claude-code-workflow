@@ -18,26 +18,28 @@ Decompose the design into a sequence of small, independently verifiable steps th
    - Have a clear objective
    - Have a bounded scope of changes
    - Be independently verifiable (you should be able to describe the unit test up front)
-3. **Ask the user where to save the plan**:
-   - Default: `.claude/ccw/<feature-name>/plan.md`
-   - External destination (Confluence, Notion, etc.) — in this case attempt to publish directly using an available tool (MCP server, CLI, etc.); if none is available, print the markdown body for the user to publish manually
-4. Write the plan as a markdown document. Suggested structure:
+3. Draft the plan as a markdown document. Suggested structure:
    - Each step gets a heading: `## Step N: <objective>`
    - Under each: scope, files affected, verification method
-5. Save to the chosen path, or publish to the external destination via an available tool (MCP server, CLI, etc.); if no such tool is available, print the markdown body so the user can publish manually. Report the saved location to the user — the file path for local saves, or the URL/link for external destinations (or, if external publishing was unavailable and the markdown was printed instead, say so).
-6. **On first run, ask the user for verification commands** and persist to `config.json`:
+4. **Present the full plan content in chat** for the user to review.
+5. **Iterate until approved**: collect the user's feedback, revise the plan, and re-present. Repeat until the user explicitly approves (e.g., "looks good", "approved", "let's save it"). Do not proceed past this step on implicit silence.
+6. After approval, **ask the user where to save the plan**:
+   - Default: `.claude/ccw/<feature-name>/plan.md`
+   - External destination (Confluence, Notion, etc.) — in this case attempt to publish directly using an available tool (MCP server, CLI, etc.); if none is available, print the markdown body for the user to publish manually
+7. Save to the chosen path, or publish to the external destination. No need to surface the file path or link in chat — the user already reviewed the content. (Exception: if external publishing was unavailable and the markdown was printed back instead, say so explicitly.)
+8. **On first run, ask the user for verification commands** and persist to `config.json`:
    - `test_command` (e.g., `npm test`)
    - `lint_command` (optional, e.g., `npm run lint`)
    - `integration_test_command` (used in `verify` phase)
-7. **Branch creation**:
+9. **Branch creation**:
    - Check the project's `CLAUDE.md` and recent `git log` / `git branch` for an established branch-name convention. If found, follow it.
    - Otherwise, propose `feature/<feature-name>` as the default.
    - Confirm the chosen name with the user before running `git checkout -b <branch-name>`.
    - Save to `state.json.config.branch_name`.
-8. Update state.json:
-   - `config.plan_doc_path` = saved path (or set `config.plan_doc_external` for external)
-   - `artifacts.plan_doc` = same value
-   - `artifacts.implementation_steps` = list of `{step, description, status: "pending"}` derived from the plan headings
+10. Update state.json:
+    - `config.plan_doc_path` = saved path (or set `config.plan_doc_external` for external)
+    - `artifacts.plan_doc` = same value
+    - `artifacts.implementation_steps` = list of `{step, description, status: "pending"}` derived from the plan headings
 
 ## Output
 - A markdown plan document
@@ -46,11 +48,12 @@ Decompose the design into a sequence of small, independently verifiable steps th
 - `config.json` populated with verification commands
 
 ## Exit condition
-The plan is saved (or published) with its location reported, verification commands are captured in `config.json`, and the feature branch is created.
+The plan is approved by the user and saved (or published), verification commands are captured in `config.json`, and the feature branch is created.
 
 ## What NOT to do
 - Don't start implementing — that's `/ccw:implement`.
 - Don't combine multiple unrelated changes in a single step.
 - Don't create a branch silently — confirm the name with the user first.
 - Don't skip persisting verification commands — they are reused throughout the workflow.
-- Don't ask the user to review or approve the plan content. Reporting where it was saved is the only acknowledgement needed — any revisions come from the orchestrator's phase-transition prompt or a re-invocation of `/ccw:plan`. (Verification commands and the branch name remain confirmation points — those are inputs to the phase, not document content.)
+- Don't save or publish the plan before the user has approved its content.
+- Don't report the saved file path or external link back to the user — they reviewed the content directly, so the location adds no value. (The exception is when external publishing was unavailable and you printed the markdown back instead — say so.)
