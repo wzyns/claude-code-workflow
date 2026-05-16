@@ -4,12 +4,12 @@ This file orients Claude Code when working on this repository.
 
 ## What this project is
 
-This repo is the source of the **`ccw` Claude Code plugin** (claude-code-workflow). The plugin provides a guided, phase-by-phase workflow for developing a single feature: design → document → plan → implement → verify → AI review → user review → PR.
+This repo is the source of the **`ccw` Claude Code plugin** (claude-code-workflow). The plugin provides a guided, phase-by-phase workflow for developing a single feature: design → document → plan → implement → AI review → user review → PR.
 
 The plugin consists of:
 
-- An orchestrator skill (`/ccw:start`) that walks the user through all 8 phases
-- 8 per-phase sub-skills (`/ccw:design`, `/ccw:document`, ...) that can also be invoked independently
+- An orchestrator skill (`/ccw:start`) that walks the user through all 7 phases
+- 7 per-phase sub-skills (`/ccw:design`, `/ccw:document`, ...) that can also be invoked independently
 
 ## Repository layout
 
@@ -35,7 +35,6 @@ The plugin consists of:
 │           ├── document.md
 │           ├── plan.md
 │           ├── implement.md
-│           ├── verify.md
 │           ├── ai-review.md
 │           ├── user-review.md
 │           └── pr.md

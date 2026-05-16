@@ -1,16 +1,16 @@
 ---
 name: start
-description: Orchestrate the ccw feature development workflow. Walks the user through 8 phases (design → document → plan → implement → verify → ai-review → user-review → pr), invokes the corresponding sub-skill for each phase, manages state in .claude/ccw/<feature>/state.json, and confirms most phase transitions with the user (verify → ai-review and ai-review → user-review auto-advance on success). Use this when the user says "start a new feature", "begin a workflow", or runs /ccw:start.
+description: Orchestrate the ccw feature development workflow. Walks the user through 7 phases (design → document → plan → implement → ai-review → user-review → pr), invokes the corresponding sub-skill for each phase, manages state in .claude/ccw/<feature>/state.json, and confirms most phase transitions with the user (ai-review → user-review auto-advances on success). Use this when the user says "start a new feature", "begin a workflow", or runs /ccw:start.
 ---
 
 # /ccw:start — Orchestrator
 
-You are the orchestrator for the `ccw` feature development workflow. Your job is to walk the user through 8 phases of feature development. **Real work happens inside per-phase sub-skills**; you sequence them, manage shared state, and confirm transitions with the user.
+You are the orchestrator for the `ccw` feature development workflow. Your job is to walk the user through 7 phases of feature development. **Real work happens inside per-phase sub-skills**; you sequence them, manage shared state, and confirm transitions with the user.
 
 ## Phase order
 
 ```
-design → document → plan → implement → verify → ai-review → user-review → pr → done
+design → document → plan → implement → ai-review → user-review → pr → done
 ```
 
 Each phase corresponds to a sub-skill: `ccw:design`, `ccw:document`, `ccw:plan`, etc.
@@ -65,7 +65,7 @@ Repeat until `current_phase == "done"`:
       - Push `current_phase` into `completed_phases`
       - Set `current_phase` to the next phase in the order
    c. **Decide whether to prompt for confirmation** based on the transition that just occurred:
-      - **Auto-advance (no prompt)** when the completed phase was `verify` or `ai-review`. In this case, print a brief one-line summary (e.g., "verify passed — advancing to ai-review") and continue the loop without asking. The next iteration will pick up the new `current_phase` and invoke the corresponding sub-skill.
+      - **Auto-advance (no prompt)** when the completed phase was `ai-review`. In this case, print a brief one-line summary (e.g., "ai-review complete — advancing to user-review") and continue the loop without asking. The next iteration will pick up the new `current_phase` and invoke the corresponding sub-skill.
       - **Prompted (default)** for every other completed phase. Summarize what just completed (the artifact produced, key decisions, any notes), then ask:
         - "Anything you'd like to revise before moving on to `<next-phase>`?"
         - "Confirm proceeding to `<next-phase>`? (yes / no / back)"
@@ -82,12 +82,11 @@ Repeat until `current_phase == "done"`:
 
 ## Confirmation policy
 
-The user must confirm most phase transitions, but two transitions auto-advance without a prompt:
+The user must confirm most phase transitions, but one transition auto-advances without a prompt:
 
-- `verify → ai-review` (after the verify sub-skill reports the happy path is clean)
 - `ai-review → user-review` (ai-review only emits findings; the user makes per-finding decisions in `user-review`)
 
-Auto-advance only removes the routine confirmation prompt — the user can still interrupt at any time (e.g., type a message to stop), and can later request `back` from `user-review` to revisit an auto-advanced phase if needed.
+Auto-advance only removes the routine confirmation prompt — the user can still interrupt at any time (e.g., type a message to stop), and can later request `back` from `user-review` to revisit `ai-review` if needed.
 
 ## Stopping mid-workflow
 

@@ -19,7 +19,7 @@ For each `implementation_step` in order (where `status != "done"`):
 
 1. **Mark the step as `in_progress`** in state.json.
 2. **Implement** the code for the step. Stay strictly within the scope of the step.
-3. **Verify**:
+3. **Test**:
    - Write or update unit tests for the new behavior.
    - Run `config.test_command` and iterate until tests pass.
    - Run `config.lint_command` if configured. Fix any issues.

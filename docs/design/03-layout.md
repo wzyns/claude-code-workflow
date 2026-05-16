@@ -27,7 +27,6 @@ claude-code-workflow/
 │           ├── document.md
 │           ├── plan.md
 │           ├── implement.md
-│           ├── verify.md
 │           ├── ai-review.md
 │           ├── user-review.md
 │           └── pr.md
@@ -37,7 +36,6 @@ claude-code-workflow/
     ├── document/SKILL.md
     ├── plan/SKILL.md
     ├── implement/SKILL.md
-    ├── verify/SKILL.md
     ├── ai-review/SKILL.md
     ├── user-review/SKILL.md
     └── pr/SKILL.md

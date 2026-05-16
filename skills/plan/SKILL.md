@@ -30,7 +30,6 @@ Decompose the design into a sequence of small, independently verifiable steps th
 8. **On first run, ask the user for verification commands** and persist to `config.json`:
    - `test_command` (e.g., `npm test`)
    - `lint_command` (optional, e.g., `npm run lint`)
-   - `integration_test_command` (used in `verify` phase)
 9. **Branch creation**:
    - Check the project's `CLAUDE.md` and recent `git log` / `git branch` for an established branch-name convention. If found, follow it.
    - Otherwise, propose `feature/<feature-name>` as the default.

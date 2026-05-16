@@ -2,7 +2,7 @@
 
 Skill: `/ccw:start`
 
-The orchestrator is the canonical entry point for the workflow. It walks the user through the 8 phases in order, confirming each transition.
+The orchestrator is the canonical entry point for the workflow. It walks the user through the 7 phases in order, confirming each transition.
 
 ## Input
 
@@ -29,7 +29,7 @@ The orchestrator is the canonical entry point for the workflow. It walks the use
    - Invoke the corresponding sub-skill via the `Skill` tool.
    - When the sub-skill reports completion, update `state.json` (move the phase into `completed_phases`, advance `current_phase`).
    - **Confirmation policy**:
-     - For `verify → ai-review` and `ai-review → user-review`, advance automatically without prompting the user. These two phases are designed to have nothing for the user to decide at the transition boundary (verify's happy path is a clean pass; ai-review only emits findings, decisions happen in user-review).
+     - For `ai-review → user-review`, advance automatically without prompting the user. `ai-review` is designed to have nothing for the user to decide at the transition boundary — it only emits findings, and decisions happen in `user-review`.
      - For all other transitions, ask the user to confirm progressing to the next phase, inviting any input or change requests.
    - The user can still interrupt an auto-advanced flow at any time, or request `back` from a later phase to revisit an auto-advanced one — auto-advance only removes the routine confirmation prompt.
 6. When `current_phase` reaches `done`, summarize the completed workflow and exit.

@@ -17,7 +17,6 @@ The orchestrator and each sub-skill persist progress in `.claude/ccw/<feature-na
     "plan_doc_external": null,
     "test_command": "npm test",
     "lint_command": "npm run lint",
-    "integration_test_command": "npm run test:integration",
     "branch_name": "feature/user-auth"
   },
   "artifacts": {
@@ -44,7 +43,7 @@ The orchestrator and each sub-skill persist progress in `.claude/ccw/<feature-na
 
 `notes` is a free-form append-only log used by the workflow. Two conventions are load-bearing:
 
-- **Commit records.** Phases that create commits (`implement`, `verify`, `user-review`) append `"[<Phase>] commit <short-hash>: <subject>"` immediately after each commit. `ai-review` reads these to know which commits belong to the workflow. `ai-review` itself does not create commits.
+- **Commit records.** Phases that create commits (`implement`, `user-review`) append `"[<Phase>] commit <short-hash>: <subject>"` immediately after each commit. `ai-review` reads these to know which commits belong to the workflow. `ai-review` itself does not create commits.
 - **Decision/skip records.** Free-form notes describing design agreements, items intentionally skipped, etc. No format prescribed.
 
 ## `artifacts.ai_review_findings`
@@ -62,7 +61,7 @@ Each finding has a minimal schema:
 
 `current_phase` and entries of `completed_phases` use these values:
 
-- `design`, `document`, `plan`, `implement`, `verify`, `ai-review`, `user-review`, `pr`, `done`
+- `design`, `document`, `plan`, `implement`, `ai-review`, `user-review`, `pr`, `done`
 
 ## `implementation_steps[].status` Values
 
