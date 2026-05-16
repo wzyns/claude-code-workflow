@@ -6,9 +6,9 @@ This is my personal Claude Code workflow for developing a feature, packaged as a
 2. **Document** — Turn the agreed design into a polished markdown doc (default `.claude/ccw/<name>/design.md`, or an external destination like Confluence).
 3. **Plan** — Decompose the work into independently verifiable steps, each with an objective, scope, and verification method. On first run, captures the project's `test`/`lint` commands and creates the feature branch.
 4. **Implement** — Carry out the plan one step at a time. Each step is a mini-cycle: implement → run unit tests → user review → commit. One commit per approved step keeps the PR easy to read.
-5. **Verify** — Run integration-level checks against the complete implementation (integration tests, full suite, lint, type check) and diagnose/fix any failures.
-6. **AI review** — Ask the user "proceed or skip". On proceed, the assistant self-reviews the commits recorded in `state.json.notes` for this workflow, summarizes findings, and applies the items the user agrees to address.
-7. **User review** — Present a structured summary of all changes for a final human review, and apply any last feedback before the change becomes externally visible.
+5. **Verify** — Run integration-level checks against the complete implementation (integration tests, full suite, lint, type check) and diagnose/fix any failures. On a clean pass the workflow auto-advances to AI review.
+6. **AI review** — The assistant auto self-reviews the commits recorded in `state.json.notes` for this workflow and emits structured findings to `artifacts.ai_review_findings`. No prompt and no fix commits at this stage — decisions about which findings to apply happen in user review.
+7. **User review** — Present a structured summary of all changes plus the AI review findings for a final human review. The user decides per-finding whether to reflect, skip, or defer, and any last feedback is applied before the change becomes externally visible.
 8. **PR** — Create the pull request following Claude Code's PR protocol, then add development notes (trade-offs, known limitations, follow-ups) as PR comments so reviewers get the accumulated context.
 
 You can run the full orchestrator (`/ccw:start`) which walks you through every phase and confirms before each transition, or invoke any single phase directly.

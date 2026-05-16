@@ -2,32 +2,31 @@
 
 Skill: `/ccw:ai-review`
 
-Get an AI review of the implementation and decide which feedback to apply.
+Run an automatic self-review of the commits made during this workflow and emit the findings for `user-review` to act on.
 
 ## Input
 
 - The implementation, committed to the feature branch. Uncommitted changes are invisible to the self-review since the review subject is the diffs of the recorded commits.
+- `state.json.notes` entries of the form `"[<Phase>] commit <short-hash>: <subject>"` recorded by earlier phases.
 
 ## Behavior
 
-1. Ask the user only **proceed or skip**.
-   - **proceed**: the assistant self-reviews the commits already recorded in `state.json.notes` for this workflow. The review subject is the union of those commits' diffs; no external tool is invoked. If no commits have been recorded yet, report it to the user and ask whether to skip or wait — do not pick a different review subject.
-   - **skip**: record the reason in `state.json.notes` and treat the phase as complete.
-2. Summarize and organize the self-review feedback.
-3. Decide together which items to address vs. ignore.
-4. Apply code changes for items to address. Fix commits made during this run are not re-reviewed in the same run.
+1. Read the workflow's recorded commits from `state.json.notes` (the lines matching `"[<Phase>] commit <hash>: <subject>"`). The union of those commits' diffs is the review subject. Snapshot this list at the start of the run.
+2. If the snapshot is empty, record `"AI review: no commits to review"` in `state.json.notes` and complete the phase. No findings are produced.
+3. Otherwise, self-review each commit's diff and produce findings. Group by severity.
+4. Write the findings list to `state.json.artifacts.ai_review_findings` using the schema described in [../05-state.md](../05-state.md). Each finding has `id`, `severity`, `summary`, and `detail`.
+5. Print a short summary to the user (count by severity, headline of each finding) for visibility, but do not ask any questions.
 
 ## Output
 
-- Code changes addressing review feedback
-- A summary of items addressed and items intentionally skipped (with reasons)
-- Any fix committed during ai-review is appended to `state.json.notes` as `"[AI Review] commit <short-hash>: <subject>"`. Commits created in this run are not re-reviewed in the same run.
+- `state.json.artifacts.ai_review_findings` populated (or explicitly empty, with a note in `state.json.notes` explaining why).
+- No code changes. No commits. Per-finding decisions (reflect / skip / defer) happen in `user-review`.
 
 ## Exit Condition
 
-- The user confirms the phase is complete (feedback addressed, or skipped).
+- Findings have been written (or the empty-snapshot case has been recorded). The phase then completes automatically.
 
 ## Notes
 
-- AI review feedback is advisory, not mandatory. Trade-offs should be made explicit.
-- The phase can be skipped — the user just answers "skip" at the prompt.
+- AI review feedback is advisory. The `user-review` phase is responsible for deciding which findings to act on.
+- This phase does not prompt for "proceed or skip" — it always runs. To skip the review entirely, the user can interrupt the orchestrator and request `back` or stop.

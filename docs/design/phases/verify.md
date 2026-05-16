@@ -13,7 +13,8 @@ Run integration-level checks against the complete implementation.
 
 1. Run the integration test command (`integration_test_command`).
 2. Run additional checks such as lint and type check.
-3. On failure, diagnose, fix, and re-verify.
+3. **Happy path**: when every check passes, print the summary and complete the phase automatically — no user confirmation prompt.
+4. **Failure path**: when any check fails, diagnose the root cause, surface it to the user along with the proposed fix, and ask how to proceed. Apply the fix only after the user agrees, then re-verify.
 
 ## Output
 
@@ -22,7 +23,7 @@ Run integration-level checks against the complete implementation.
 
 ## Exit Condition
 
-- All checks pass and the user confirms.
+- All checks pass — the phase completes automatically. On the failure path, the phase completes once the user-approved fixes pass all checks.
 
 ## Notes
 

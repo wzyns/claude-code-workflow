@@ -14,9 +14,9 @@ The workflow consists of 8 phases:
 | 2 | `/ccw:document` | Write the agreed-upon design as a markdown document |
 | 3 | `/ccw:plan` | Decompose the implementation into well-defined steps |
 | 4 | `/ccw:implement` | For each step: [implement → unit test → user review → commit], iterating |
-| 5 | `/ccw:verify` | Run integration tests and other checks against the full implementation |
-| 6 | `/ccw:ai-review` | Assistant self-reviews the commits recorded for this workflow (user only chooses proceed or skip) |
-| 7 | `/ccw:user-review` | The user personally reviews all changes |
+| 5 | `/ccw:verify` | Run integration tests and other checks against the full implementation; auto-advances on success |
+| 6 | `/ccw:ai-review` | Assistant auto self-reviews the commits recorded for this workflow and emits findings to `artifacts.ai_review_findings` (no prompt, no fix commits) |
+| 7 | `/ccw:user-review` | The user personally reviews all changes and decides per-item what to do with AI review findings |
 | 8 | `/ccw:pr` | Create the PR, including any noteworthy development notes as PR comments |
 
 The orchestrator skill `/ccw:start` walks the user through these phases in order.

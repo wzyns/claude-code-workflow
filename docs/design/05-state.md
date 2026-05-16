@@ -27,6 +27,10 @@ The orchestrator and each sub-skill persist progress in `.claude/ccw/<feature-na
       { "step": 1, "description": "Define schema", "status": "done" },
       { "step": 2, "description": "API endpoints", "status": "in_progress" },
       { "step": 3, "description": "Frontend integration", "status": "pending" }
+    ],
+    "ai_review_findings": [
+      { "id": "F1", "severity": "important", "summary": "Missing input validation in /signup", "detail": "The handler in api/signup.ts does not validate the email field; an empty string is accepted." },
+      { "id": "F2", "severity": "nit", "summary": "Inconsistent log message casing", "detail": "Some log lines use lower-case, others Title Case." }
     ]
   },
   "notes": [
@@ -40,8 +44,19 @@ The orchestrator and each sub-skill persist progress in `.claude/ccw/<feature-na
 
 `notes` is a free-form append-only log used by the workflow. Two conventions are load-bearing:
 
-- **Commit records.** Phases that create commits (`implement`, `verify`, `ai-review`, `user-review`) append `"[<Phase>] commit <short-hash>: <subject>"` immediately after each commit. `ai-review` reads these to know which commits belong to the workflow.
+- **Commit records.** Phases that create commits (`implement`, `verify`, `user-review`) append `"[<Phase>] commit <short-hash>: <subject>"` immediately after each commit. `ai-review` reads these to know which commits belong to the workflow. `ai-review` itself does not create commits.
 - **Decision/skip records.** Free-form notes describing design agreements, items intentionally skipped, etc. No format prescribed.
+
+## `artifacts.ai_review_findings`
+
+`ai-review` writes its self-review output here as a structured list. `user-review` reads this list and presents each finding alongside the diff summary so the user can decide per-item whether to reflect, skip, or defer.
+
+Each finding has a minimal schema:
+
+- `id` — short identifier within the run (e.g., `F1`, `F2`). Used to reference the finding in `notes` when the user skips or defers it.
+- `severity` — one of `important`, `nit`, `info`. Higher severities should be presented first.
+- `summary` — one-line headline of the issue.
+- `detail` — longer explanation, including file/line references in free-form text when useful.
 
 ## Phase Values
 
