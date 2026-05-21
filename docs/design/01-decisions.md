@@ -14,4 +14,3 @@ This file captures the design decisions made for `ccw` and the reasoning behind 
 | Autonomy level | Phase transitions auto-advance once a sub-skill reports completion; each sub-skill owns whatever user approval it needs internally | Avoids a redundant "confirm next phase?" prompt on top of the approval the sub-skill already collected; the user can still interrupt and ask to revisit a prior phase |
 | AI review tool | Assistant self-reviews the commits recorded in `state.json.notes` for this workflow and emits findings to `artifacts.ai_review_findings` | No prompt at the start; runs automatically. AI review no longer creates fix commits — decisions about which findings to apply are deferred to `user-review` |
 | PR creation tool | `gh pr create` | Uses the standard Claude Code PR protocol |
-| Per-phase verification commands | Asked once on first run, stored in `config.json` | Reused across the same feature |

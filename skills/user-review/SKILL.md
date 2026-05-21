@@ -31,7 +31,7 @@ Give the user a structured opportunity to review the change before it becomes ex
 6. **Invite freeform feedback** on the diff itself:
    - "Anything else you'd like to change before we open the PR?"
 7. **Apply changes** for items the user wants reflected, plus any freeform feedback:
-   - Re-run `config.test_command` to make sure nothing broke.
+   - Re-run the affected unit tests to make sure nothing broke.
    - If a fix is committed, append a one-line record to `state.json.notes` in the format `"[User Review] commit <short-hash>: <subject>"` (use `git log -1 --pretty='%h %s'`).
    - Re-summarize the affected portion.
 8. Repeat steps 6–7 until the user explicitly approves moving to PR creation.

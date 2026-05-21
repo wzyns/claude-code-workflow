@@ -88,7 +88,7 @@ Prefix every commit message subject with `[#<issue_number>] ` to track the relat
 
 Files that ship with the plugin must be written in English: everything under `docs/`, `skills/`, `README.md`, `CLAUDE.md`, and commit messages. The plugin is consumed by users of any locale, so prompts and documentation it emits stay locale-neutral.
 
-Files that are local to a single workflow run — primarily `state.json` and `config.json` under `.claude/ccw/<feature-name>/` of the consuming project — may follow whatever language the user is conversing in. These never ship with the plugin.
+Files that are local to a single workflow run — primarily `state.json` under `.claude/ccw/<feature-name>/` of the consuming project — may follow whatever language the user is conversing in. These never ship with the plugin.
 
 ## Common tasks
 
@@ -101,7 +101,6 @@ Files that are local to a single workflow run — primarily `state.json` and `co
 When the `ccw` plugin is *used* (in some other project), it creates `.claude/ccw/<feature-name>/` containing:
 
 - `state.json` — progress state for an in-progress feature
-- `config.json` — verification commands for that feature
 - `design.md` and `plan.md` — feature artifacts (default location; the user may pick an external destination like Confluence instead)
 
 These paths are mentioned here for context only. They never appear in this repo.

@@ -15,8 +15,6 @@ The orchestrator and each sub-skill persist progress in `.claude/ccw/<feature-na
     "design_doc_external": null,
     "plan_doc_path": ".claude/ccw/user-auth/plan.md",
     "plan_doc_external": null,
-    "test_command": "npm test",
-    "lint_command": "npm run lint",
     "branch_name": "feature/user-auth"
   },
   "artifacts": {
@@ -66,7 +64,3 @@ Each finding has a minimal schema:
 ## `implementation_steps[].status` Values
 
 - `pending`, `in_progress`, `done`
-
-## Companion file: `config.json`
-
-`config.json` holds settings that don't change frequently within a single feature (mostly verification commands). It is populated during the `plan` phase on first run and reused throughout.

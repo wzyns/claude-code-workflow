@@ -9,8 +9,6 @@ Execute the plan one implementation step at a time. Each step is a mini-cycle th
 
 ## Inputs
 - `state.json.artifacts.implementation_steps`
-- `state.json.config.test_command`
-- `state.json.config.lint_command` (optional)
 - The plan document at `state.json.config.plan_doc_path`
 
 ## Per-step procedure
@@ -21,8 +19,7 @@ For each `implementation_step` in order (where `status != "done"`):
 2. **Implement** the code for the step. Stay strictly within the scope of the step.
 3. **Test**:
    - Write or update unit tests for the new behavior.
-   - Run `config.test_command` and iterate until tests pass.
-   - Run `config.lint_command` if configured. Fix any issues.
+   - Run those tests and iterate until they pass.
 4. **Present for user review**:
    - Summarize what changed (files touched, behavior added).
    - Show or describe the diff at a level the user can react to.
@@ -56,7 +53,7 @@ If a step reveals that the plan is wrong (e.g., a chosen approach doesn't work, 
 
 ## What NOT to do
 - Don't commit before the user approves the step.
-- Don't skip the test/lint loop — even for "trivial" steps.
+- Don't skip the test loop — even for "trivial" steps.
 - Don't move to the next step without user approval of the current one.
 - Don't refactor surrounding code unless it's required for the step.
 - Don't batch multiple steps into one commit — one commit per approved step.

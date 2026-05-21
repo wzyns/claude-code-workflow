@@ -18,8 +18,7 @@ Decompose the implementation into well-defined, independently verifiable steps.
 3. Present an abbreviated summary in chat for the user to review — list each step's heading and objective only; do not dump per-step scope, affected files, or verification details into chat. Mention that the full plan with those details will be saved to the document. If the user asks about a specific step, expand only that step.
 4. Iterate on feedback: revise the plan and re-present until the user explicitly approves.
 5. After approval, ask for the storage location (default `.claude/ccw/<name>/plan.md`, or external such as Confluence) and save/publish the plan.
-6. On first run, ask for verification commands (`test`, `lint`, etc.) and persist them to `config.json`.
-7. Create a branch:
+6. Create a branch:
    - Infer the project's branch-name convention from `CLAUDE.md` and recent git history; fall back to `feature/<feature-name>`.
    - Confirm the name with the user, then run `git checkout -b`.
 
@@ -27,13 +26,12 @@ Decompose the implementation into well-defined, independently verifiable steps.
 
 - `plan.md` (in the chosen location, defaulting to `.claude/ccw/<name>/plan.md`, or content posted to an external destination)
 - `state.json.config.plan_doc_path` (or `plan_doc_external`) updated
-- `config.json` populated with verification commands
 - A new git branch
 - `state.json.artifacts.plan_doc` and `state.json.artifacts.implementation_steps` populated
 
 ## Exit Condition
 
-- The plan is approved by the user and saved (or published), verification commands are captured, and the branch is created.
+- The plan is approved by the user and saved (or published), and the branch is created.
 
 ## Notes
 

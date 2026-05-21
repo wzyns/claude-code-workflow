@@ -48,7 +48,6 @@ Created by the plugin inside whatever project is using it. By default, both meta
 ```
 .claude/ccw/<feature-name>/
 ├── state.json    # Progress state
-├── config.json   # Verification commands and other settings
 ├── design.md     # Default location for the design document
 └── plan.md       # Default location for the plan document
 ```
