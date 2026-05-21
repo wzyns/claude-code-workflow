@@ -1,11 +1,11 @@
 ---
 name: start
-description: Orchestrate the ccw feature development workflow. Walks the user through 7 phases (design → document → plan → implement → ai-review → user-review → pr), invokes the corresponding sub-skill for each phase, manages state in .claude/ccw/<feature>/state.json, and confirms most phase transitions with the user (ai-review → user-review auto-advances on success). Use this when the user says "start a new feature", "begin a workflow", or runs /ccw:start.
+description: Orchestrate the ccw feature development workflow. Walks the user through 7 phases (design → document → plan → implement → ai-review → user-review → pr), invokes the corresponding sub-skill for each phase, manages state in .claude/ccw/<feature>/state.json, and auto-advances each transition as soon as the sub-skill reports completion (each sub-skill owns any user approval it needs). Use this when the user says "start a new feature", "begin a workflow", or runs /ccw:start.
 ---
 
 # /ccw:start — Orchestrator
 
-You are the orchestrator for the `ccw` feature development workflow. Your job is to walk the user through 7 phases of feature development. **Real work happens inside per-phase sub-skills**; you sequence them, manage shared state, and confirm transitions with the user.
+You are the orchestrator for the `ccw` feature development workflow. Your job is to walk the user through 7 phases of feature development. **Real work happens inside per-phase sub-skills**; you sequence them and manage shared state. Each sub-skill is responsible for collecting any user approval it needs *before* declaring itself complete, so the orchestrator does not re-prompt on top of that — it advances automatically once the sub-skill returns.
 
 ## Phase order
 
@@ -64,29 +64,20 @@ Repeat until `current_phase == "done"`:
    b. If the sub-skill reports its phase is complete, update `state.json`:
       - Push `current_phase` into `completed_phases`
       - Set `current_phase` to the next phase in the order
-   c. **Decide whether to prompt for confirmation** based on the transition that just occurred:
-      - **Auto-advance (no prompt)** when the completed phase was `ai-review`. In this case, print a brief one-line summary (e.g., "ai-review complete — advancing to user-review") and continue the loop without asking. The next iteration will pick up the new `current_phase` and invoke the corresponding sub-skill.
-      - **Prompted (default)** for every other completed phase. Summarize what just completed (the artifact produced, key decisions, any notes), then ask:
-        - "Anything you'd like to revise before moving on to `<next-phase>`?"
-        - "Confirm proceeding to `<next-phase>`? (yes / no / back)"
-      Honor the user's response:
-      - `yes` → continue the loop
-      - `no` or feedback → re-invoke the same sub-skill or address the feedback
-      - `back` → rewind `current_phase` to the previous phase, remove it from `completed_phases`, and re-invoke that sub-skill
+   c. Print a one-line transition announcement (e.g., `design complete — advancing to document`) and continue the loop. **Do not ask the user to confirm the transition** — the sub-skill is responsible for collecting any user approval it needs before reporting completion.
+   d. If at any point the user interrupts to ask for going back (e.g., "go back to plan", "let's revisit design"), rewind `current_phase` to the requested phase, remove it from `completed_phases`, and re-invoke that sub-skill.
 
 ## State management rules
 
 - **Never** perform phase work yourself. Delegate to the sub-skill.
-- If a sub-skill reports incomplete or fails, leave `current_phase` unchanged and surface the failure to the user — even if it's one of the auto-advanced phases.
+- If a sub-skill reports incomplete or fails, leave `current_phase` unchanged and surface the failure to the user.
 - If `state.json` is malformed when reading, surface the issue to the user before doing anything destructive.
 
-## Confirmation policy
+## Transition policy
 
-The user must confirm most phase transitions, but one transition auto-advances without a prompt:
+All phase transitions auto-advance once the sub-skill reports completion — there is no "confirm next phase?" prompt at the orchestrator level. Each sub-skill is expected to collect whatever user approval its phase needs *before* declaring itself done (e.g., `design` waits for a "design complete" signal, `plan` iterates until the plan is approved, `implement` requires per-step approval, `user-review` requires explicit approval before completing).
 
-- `ai-review → user-review` (ai-review only emits findings; the user makes per-finding decisions in `user-review`)
-
-Auto-advance only removes the routine confirmation prompt — the user can still interrupt at any time (e.g., type a message to stop), and can later request `back` from `user-review` to revisit `ai-review` if needed.
+The user can still interrupt at any time. If they ask to revisit a previous phase, rewind `current_phase`, remove it from `completed_phases`, and re-invoke that sub-skill.
 
 ## Stopping mid-workflow
 

@@ -28,4 +28,4 @@ Turn the agreements from the `design` phase into a polished markdown document.
 
 - If the user picks an external destination, attempt to publish directly using an available tool (MCP server, CLI, etc.). If no such tool is available, output the markdown body so the user can publish manually.
 - The document should be self-contained enough to onboard a new reader to the feature.
-- Do not ask the user to review the document content. Reporting the save location is the only user-facing acknowledgement; content review happens at the phase-transition prompt in the orchestrator, and if the skill is invoked directly the user can re-run `/ccw:document` to revise.
+- Do not ask the user to review the document content. Reporting the save location is the only user-facing acknowledgement. If the user wants to revise after the fact (whether the skill ran via the orchestrator or directly), they can re-invoke `/ccw:document`.

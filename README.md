@@ -10,7 +10,7 @@ This is my personal Claude Code workflow for developing a feature, packaged as a
 6. **User review** — Present a structured summary of all changes plus the AI review findings for a final human review. The user decides per-finding whether to reflect, skip, or defer, and any last feedback is applied before the change becomes externally visible.
 7. **PR** — Create the pull request following Claude Code's PR protocol, then add development notes (trade-offs, known limitations, follow-ups) as PR comments so reviewers get the accumulated context.
 
-You can run the full orchestrator (`/ccw:start`) which walks you through every phase and confirms before each transition, or invoke any single phase directly.
+You can run the full orchestrator (`/ccw:start`) which walks you through every phase in order, or invoke any single phase directly.
 
 ## Install
 
@@ -30,7 +30,7 @@ Start a new feature workflow:
 /ccw:start
 ```
 
-The orchestrator walks you through each phase and confirms with you before transitioning. You can also invoke any single phase directly:
+The orchestrator walks you through each phase in order. You can also invoke any single phase directly:
 
 ```
 /ccw:design /ccw:document /ccw:plan /ccw:implement

@@ -41,4 +41,4 @@ The document is saved (or published) and the location has been reported to the u
 
 ## What NOT to do
 - Don't include implementation steps — that's the `plan` phase.
-- Don't ask the user to review or approve the document content. Reporting where it was saved is the only acknowledgement needed — any revisions come from the orchestrator's phase-transition prompt or a re-invocation of `/ccw:document`.
+- Don't ask the user to review or approve the document content. Reporting where it was saved is the only acknowledgement needed — if the user wants to revise after the fact, they can re-invoke `/ccw:document`.
