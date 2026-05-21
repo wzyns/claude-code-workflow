@@ -15,7 +15,7 @@ Decompose the implementation into well-defined, independently verifiable steps.
    - Objective
    - Scope of changes
    - Verification method (unit test outline, etc.)
-3. Present the full plan content in chat for the user to review.
+3. Present an abbreviated summary in chat for the user to review — list each step's heading and objective only; do not dump per-step scope, affected files, or verification details into chat. Mention that the full plan with those details will be saved to the document. If the user asks about a specific step, expand only that step.
 4. Iterate on feedback: revise the plan and re-present until the user explicitly approves.
 5. After approval, ask for the storage location (default `.claude/ccw/<name>/plan.md`, or external such as Confluence) and save/publish the plan.
 6. On first run, ask for verification commands (`test`, `lint`, etc.) and persist them to `config.json`.

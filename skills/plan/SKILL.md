@@ -21,8 +21,11 @@ Decompose the design into a sequence of small, independently verifiable steps th
 3. Draft the plan as a markdown document. Suggested structure:
    - Each step gets a heading: `## Step N: <objective>`
    - Under each: scope, files affected, verification method
-4. **Present the full plan content in chat** for the user to review.
-5. **Iterate until approved**: collect the user's feedback, revise the plan, and re-present. Repeat until the user explicitly approves (e.g., "looks good", "approved", "let's save it"). Do not proceed past this step on implicit silence.
+4. **Present an abbreviated summary in chat** for the user to review:
+   - List each step as `## Step N: <objective>` — heading and objective only.
+   - Do NOT dump per-step scope, affected files, or verification details into chat. Those live only in the saved document.
+   - Tell the user the full detail will be persisted to the document, and offer to expand any specific step on request.
+5. **Iterate until approved**: collect the user's feedback, revise the plan, and re-present the abbreviated summary. Repeat until the user explicitly approves (e.g., "looks good", "approved", "let's save it"). Do not proceed past this step on implicit silence.
 6. After approval, **ask the user where to save the plan**:
    - Default: `.claude/ccw/<feature-name>/plan.md`
    - External destination (Confluence, Notion, etc.) — in this case attempt to publish directly using an available tool (MCP server, CLI, etc.); if none is available, print the markdown body for the user to publish manually
