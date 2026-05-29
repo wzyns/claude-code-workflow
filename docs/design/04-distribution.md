@@ -13,7 +13,7 @@ Strict semver is awkward for an agentic plugin because behavior is partly non-de
 **Layer 1 — deterministic contract.** Treat changes here like ordinary semver:
 
 - Slash command names and arguments
-- `state.json` and `config.json` schemas (fields, names, allowed values)
+- `state.json` schema (fields, names, allowed values)
 - Artifact paths and formats (e.g., `.claude/ccw/<name>/design.md`)
 - Phase list and phase order
 

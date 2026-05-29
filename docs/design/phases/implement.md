@@ -7,14 +7,13 @@ Carry out the plan one step at a time. Each step is its own mini-cycle ending in
 ## Input
 
 - `plan.md` and `state.json.artifacts.implementation_steps`
-- `state.json.config.test_command` (and optionally `lint_command`)
 
 ## Behavior
 
 For each `implementation_step` in order (where `status != "done"`):
 
 1. **Implement** the code for the step.
-2. **Verify** by running unit tests (and lint if configured). Iterate until they pass.
+2. **Test** by writing or updating unit tests for the new behavior and running them. Iterate until they pass.
 3. **User review** — present the diff and a brief summary of the change to the user.
 4. **Branch on the user's response:**
    - **Approved →** create a commit for this step, mark the step as `done`, move to the next step.
@@ -27,6 +26,7 @@ Update `state.json.artifacts.implementation_steps[].status` as steps move from `
 - One commit per approved step
 - Code changes and unit tests
 - Updated `state.json` with step statuses
+- Each commit appended to `state.json.notes` as `"[Implement] commit <short-hash>: <subject>"` so later phases (notably `ai-review`) can locate the changes that belong to this workflow
 
 ## Exit Condition
 

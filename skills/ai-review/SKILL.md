@@ -1,43 +1,38 @@
 ---
 name: ai-review
-description: Sixth phase of the ccw workflow. Get an AI review by asking the user to run /ultrareview, then summarize the results, decide together which items to address, and apply changes. Use this when the user invokes /ccw:ai-review directly, or when the orchestrator (/ccw:start) delegates the AI review phase.
+description: Sixth phase of the ccw workflow. Auto self-review the commits recorded in state.json.notes for this workflow and emit findings to state.json.artifacts.ai_review_findings. No "proceed/skip" prompt and no fix commits — per-finding decisions happen in user-review. Use this when the user invokes /ccw:ai-review directly, or when the orchestrator (/ccw:start) delegates the AI review phase.
 ---
 
 # /ccw:ai-review — AI Review
 
-Get an automated AI review of the implementation and decide which feedback to apply.
+Auto self-review the commits recorded for this workflow and write the findings to `state.json.artifacts.ai_review_findings`. This phase does not prompt the user, does not modify code, and does not create commits — `user-review` decides what to do with the findings.
 
 ## Inputs
-- The completed implementation (preferably committed to the feature branch)
+- The implementation, committed to the feature branch. Uncommitted changes are invisible to the self-review since the review subject is the diffs of the recorded commits.
+- `state.json.notes` entries of the form `"[<Phase>] commit <short-hash>: <subject>"` recorded by earlier phases.
 
 ## Procedure
 
-1. **Suggest committing** any uncommitted changes first, so the review covers a stable snapshot.
-2. **Ask the user to run `/ultrareview`** in this same session. You cannot invoke `/ultrareview` yourself — it must be user-triggered.
-3. When the user shares the review results, **summarize** them:
-   - Group by severity (critical, important, nit)
-   - Highlight items with concrete code references (file:line)
-4. **Discuss with the user** which items to address:
-   - For each item, propose: "address now" / "skip" / "defer to follow-up"
-   - For "skip" or "defer", record the reason in `state.json.notes`
-5. **Apply changes** for items to address. After each fix:
-   - Re-run `config.test_command` to make sure nothing broke
-6. Summarize what was addressed and what was intentionally skipped.
+1. **Collect the review subject.** Read `state.json.notes` and extract every line matching `"[<Phase>] commit <short-hash>: <subject>"`. The set of `<short-hash>` values is the review subject. Snapshot this list at the start of the run.
+2. **Handle the empty case.** If the snapshot is empty (no commits have been recorded yet for this workflow), append a single note `"AI review: no commits to review"` to `state.json.notes`, set `state.json.artifacts.ai_review_findings = []`, and complete the phase. Stop here.
+3. **Self-review.** For each commit, read its diff (`git show <hash>`) and produce findings. Findings should be grouped by severity (`important`, `nit`, `info`) with concrete code references (file:line) where useful, included in the `detail` field.
+4. **Write findings.** Set `state.json.artifacts.ai_review_findings` to a JSON array of findings. Each finding follows this minimal schema:
+   - `id` — short identifier within the run (e.g., `F1`, `F2`).
+   - `severity` — one of `important`, `nit`, `info`.
+   - `summary` — one-line headline.
+   - `detail` — longer explanation, with file/line references in free-form text when useful.
+5. **Print a short summary** to the user (count by severity and a one-line headline per finding) for visibility. Do not ask any questions and do not wait for confirmation.
 
 ## Output
-- Code changes addressing review feedback
-- Entries in `state.json.notes` describing items addressed and items intentionally skipped
+- `state.json.artifacts.ai_review_findings` populated as a structured list (or `[]` for the empty-snapshot case).
+- No code changes, no commits.
 
 ## Exit condition
-The user confirms the AI review feedback has been handled.
-
-## If /ultrareview is unavailable
-If the user reports `/ultrareview` is not available in their environment:
-1. Ask if they want to skip this phase or use an alternative review tool.
-2. If skipped, record explicitly in `state.json.notes` (e.g., `"AI review skipped: <reason>"`).
-3. Move on with explicit user opt-out — do not silently bypass.
+Findings have been written (or the empty-snapshot note has been added). The phase completes automatically without a user prompt.
 
 ## What NOT to do
-- Don't try to invoke `/ultrareview` yourself — instruct the user.
-- Don't blindly apply all review feedback. Discuss trade-offs with the user.
-- Don't treat AI review feedback as mandatory; it's advisory.
+- Don't ask "proceed or skip" — the phase always runs.
+- Don't apply fixes or create commits in this phase. Per-finding decisions (reflect / skip / defer) belong to `user-review`.
+- Don't invoke external review tools. The review is the assistant's own pass over the recorded commits.
+- Don't include commits outside the snapshotted list (e.g., commits from earlier merged work).
+- Don't treat AI review feedback as mandatory; it's advisory input for `user-review`.

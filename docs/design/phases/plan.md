@@ -15,24 +15,27 @@ Decompose the implementation into well-defined, independently verifiable steps.
    - Objective
    - Scope of changes
    - Verification method (unit test outline, etc.)
-3. Ask the user to review and approve.
-4. On first run, ask for verification commands (`test`, `lint`, etc.) and persist them to `config.json`.
-5. Create a branch:
+3. Present an abbreviated summary in chat for the user to review — list each step's heading and objective only; do not dump per-step scope, affected files, or verification details into chat. Mention that the full plan with those details will be saved to the document. If the user asks about a specific step, expand only that step.
+4. Iterate on feedback: revise the plan and re-present until the user explicitly approves.
+5. After approval, ask for the storage location (default `.claude/ccw/<name>/plan.md`, or external such as Confluence) and save/publish the plan.
+6. Create a branch:
    - Infer the project's branch-name convention from `CLAUDE.md` and recent git history; fall back to `feature/<feature-name>`.
    - Confirm the name with the user, then run `git checkout -b`.
 
 ## Output
 
-- `plan.md` (in the chosen location, defaulting to `.claude/ccw/<name>/plan.md`)
-- `config.json` populated with verification commands
+- `plan.md` (in the chosen location, defaulting to `.claude/ccw/<name>/plan.md`, or content posted to an external destination)
+- `state.json.config.plan_doc_path` (or `plan_doc_external`) updated
 - A new git branch
 - `state.json.artifacts.plan_doc` and `state.json.artifacts.implementation_steps` populated
 
 ## Exit Condition
 
-- The user approves the plan.
+- The plan is approved by the user and saved (or published), and the branch is created.
 
 ## Notes
 
-- The plan is a contract for the `implement` phase; bigger ambiguity here means more rework later.
+- If the user picks an external destination, attempt to publish directly using an available tool (MCP server, CLI, etc.). If no such tool is available, output the markdown body so the user can publish manually.
+- The plan is a contract for the `implement` phase; bigger ambiguity here means more rework later — that is why content review happens here, before anything is persisted.
 - Steps should be small enough that each can land as a meaningful unit of progress.
+- The review loop ends only on explicit user approval. There is no need to surface the save path/link after persisting — the user already saw and approved the content.

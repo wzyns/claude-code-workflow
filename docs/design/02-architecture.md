@@ -23,7 +23,6 @@ Each phase is implemented as an independent skill folder under `skills/`.
 | `document` | `/ccw:document` | Design documentation | [phases/document.md](phases/document.md) |
 | `plan` | `/ccw:plan` | Implementation plan | [phases/plan.md](phases/plan.md) |
 | `implement` | `/ccw:implement` | Step-by-step implementation | [phases/implement.md](phases/implement.md) |
-| `verify` | `/ccw:verify` | Integration verification | [phases/verify.md](phases/verify.md) |
 | `ai-review` | `/ccw:ai-review` | AI review | [phases/ai-review.md](phases/ai-review.md) |
 | `user-review` | `/ccw:user-review` | Final user review | [phases/user-review.md](phases/user-review.md) |
 | `pr` | `/ccw:pr` | Pull request creation | [phases/pr.md](phases/pr.md) |
@@ -56,7 +55,6 @@ The orchestrator performs the following:
 /ccw:document
 /ccw:plan
 /ccw:implement
-/ccw:verify
 /ccw:ai-review
 /ccw:user-review
 /ccw:pr

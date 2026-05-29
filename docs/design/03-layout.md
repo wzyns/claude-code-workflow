@@ -27,7 +27,6 @@ claude-code-workflow/
 │           ├── document.md
 │           ├── plan.md
 │           ├── implement.md
-│           ├── verify.md
 │           ├── ai-review.md
 │           ├── user-review.md
 │           └── pr.md
@@ -37,7 +36,6 @@ claude-code-workflow/
     ├── document/SKILL.md
     ├── plan/SKILL.md
     ├── implement/SKILL.md
-    ├── verify/SKILL.md
     ├── ai-review/SKILL.md
     ├── user-review/SKILL.md
     └── pr/SKILL.md
@@ -50,9 +48,8 @@ Created by the plugin inside whatever project is using it. By default, both meta
 ```
 .claude/ccw/<feature-name>/
 ├── state.json    # Progress state
-├── config.json   # Verification commands and other settings
 ├── design.md     # Default location for the design document
 └── plan.md       # Default location for the plan document
 ```
 
-> When the user chooses an external destination (e.g., Confluence) for `design.md` or `plan.md`, the skill outputs the markdown body and the user publishes it to the external system. The external location (URL, description, etc.) is recorded in `state.json` under `design_doc_external`. In that case `design.md` / `plan.md` may be absent from this directory.
+> When the user chooses an external destination (e.g., Confluence) for `design.md` or `plan.md`, the skill first attempts to publish directly using an available tool (MCP server, CLI, etc.). If no such tool is available, it outputs the markdown body for the user to publish manually. The external location (URL, description, etc.) is recorded in `state.json` under `design_doc_external` or `plan_doc_external`. In that case `design.md` / `plan.md` may be absent from this directory.

@@ -6,7 +6,7 @@ This directory is the **source of truth** for the `ccw` plugin's design. The ski
 
 `ccw` is a Claude Code plugin that turns the recurring process of developing a single feature into a guided workflow. Instead of the user manually instructing each step, the skill drives the workflow phase-by-phase while the user only needs to respond and approve at each transition.
 
-The workflow consists of 8 phases:
+The workflow consists of 7 phases:
 
 | Phase | Skill | Description |
 |-------|-------|-------------|
@@ -14,10 +14,9 @@ The workflow consists of 8 phases:
 | 2 | `/ccw:document` | Write the agreed-upon design as a markdown document |
 | 3 | `/ccw:plan` | Decompose the implementation into well-defined steps |
 | 4 | `/ccw:implement` | For each step: [implement → unit test → user review → commit], iterating |
-| 5 | `/ccw:verify` | Run integration tests and other checks against the full implementation |
-| 6 | `/ccw:ai-review` | AI-driven code review (e.g., `/ultrareview`) |
-| 7 | `/ccw:user-review` | The user personally reviews all changes |
-| 8 | `/ccw:pr` | Create the PR, including any noteworthy development notes as PR comments |
+| 5 | `/ccw:ai-review` | Assistant auto self-reviews the commits recorded for this workflow and emits findings to `artifacts.ai_review_findings` (no prompt, no fix commits) |
+| 6 | `/ccw:user-review` | The user personally reviews all changes and decides per-item what to do with AI review findings |
+| 7 | `/ccw:pr` | Create the PR, including any noteworthy development notes as PR comments |
 
 The orchestrator skill `/ccw:start` walks the user through these phases in order.
 
@@ -42,7 +41,6 @@ The orchestrator skill `/ccw:start` walks the user through these phases in order
 | Document | [phases/document.md](phases/document.md) |
 | Plan | [phases/plan.md](phases/plan.md) |
 | Implement | [phases/implement.md](phases/implement.md) |
-| Verify | [phases/verify.md](phases/verify.md) |
 | AI Review | [phases/ai-review.md](phases/ai-review.md) |
 | User Review | [phases/user-review.md](phases/user-review.md) |
 | PR | [phases/pr.md](phases/pr.md) |
