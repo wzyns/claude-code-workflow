@@ -1,7 +1,7 @@
 {
   "name": "ccw",
   "description": "Guided 8-phase feature development workflow for Claude Code (design → document → plan → implement → verify → AI review → user review → PR).",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": {
     "name": "wzyns"
   },
