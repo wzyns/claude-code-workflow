@@ -1,14 +1,13 @@
 # claude-code-workflow
 
-This is my personal Claude Code workflow for developing a feature, packaged as a plugin (`ccw`) so I can use it across machines. It guides feature work through 7 phases:
+This is my personal Claude Code workflow for developing a feature, packaged as a plugin (`ccw`) so I can use it across machines. It guides feature work through 6 phases:
 
-1. **Design** — Talk through the feature in conversation to clarify requirements, constraints, alternatives, and trade-offs. Produces an agreed summary, not yet a document.
-2. **Document** — Turn the agreed design into a polished markdown doc (default `.claude/ccw/<name>/design.md`, or an external destination like Confluence).
-3. **Plan** — Decompose the work into independently verifiable steps, each with an objective, scope, and verification method. Creates the feature branch.
-4. **Implement** — Carry out the plan one step at a time. Each step is a mini-cycle: implement → run unit tests → user review → commit. One commit per approved step keeps the PR easy to read.
-5. **AI review** — The assistant auto self-reviews the commits recorded in `state.json.notes` for this workflow and emits structured findings to `artifacts.ai_review_findings`. No prompt and no fix commits at this stage — decisions about which findings to apply happen in user review.
-6. **User review** — Present a structured summary of all changes plus the AI review findings for a final human review. The user decides per-finding whether to reflect, skip, or defer, and any last feedback is applied before the change becomes externally visible.
-7. **PR** — Create the pull request following Claude Code's PR protocol, then add development notes (trade-offs, known limitations, follow-ups) as PR comments so reviewers get the accumulated context.
+1. **Design** — Talk through the feature in conversation to clarify requirements, constraints, alternatives, and trade-offs. Ends by saving the agreed design as a markdown doc at `.claude/ccw/<name>/design.md`.
+2. **Plan** — Decompose the work into independently verifiable steps, each with an objective, scope, and verification method. Saves the plan to `.claude/ccw/<name>/plan.md` and creates the feature branch.
+3. **Implement** — Carry out the plan one step at a time. Each step is a mini-cycle: implement → run unit tests → user review → commit. One commit per approved step keeps the PR easy to read.
+4. **AI review** — The assistant auto self-reviews the commits recorded in `state.json.notes` for this workflow and emits structured findings to `artifacts.ai_review_findings`. No prompt and no fix commits at this stage — decisions about which findings to apply happen in user review.
+5. **User review** — Present a structured summary of all changes plus the AI review findings for a final human review. The user decides per-finding whether to reflect, skip, or defer, and any last feedback is applied before the change becomes externally visible.
+6. **PR** — Create the pull request following Claude Code's PR protocol, then add development notes (trade-offs, known limitations, follow-ups) as PR comments so reviewers get the accumulated context.
 
 You can run the full orchestrator (`/ccw:start`) which walks you through every phase in order, or invoke any single phase directly.
 
@@ -33,7 +32,7 @@ Start a new feature workflow:
 The orchestrator walks you through each phase in order. You can also invoke any single phase directly:
 
 ```
-/ccw:design /ccw:document /ccw:plan /ccw:implement
+/ccw:design /ccw:plan /ccw:implement
 /ccw:ai-review /ccw:user-review /ccw:pr
 ```
 
@@ -42,6 +41,7 @@ The orchestrator walks you through each phase in order. You can also invoke any 
 When you run `ccw` in a project, it creates `.claude/ccw/<feature>/` with:
 
 - `state.json` — progress state, changes frequently
+- `design.md` / `plan.md` — the design and plan documents
 
 To keep this metadata out of git, add the following to your `.gitignore`:
 

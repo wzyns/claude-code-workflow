@@ -2,7 +2,7 @@
 
 Skill: `/ccw:start`
 
-The orchestrator is the canonical entry point for the workflow. It walks the user through the 7 phases in order, advancing automatically as each sub-skill completes. Each sub-skill is responsible for getting any user approval it needs before declaring itself done; the orchestrator does not re-prompt on top.
+The orchestrator is the canonical entry point for the workflow. It walks the user through the 6 phases in order, advancing automatically as each sub-skill completes. Each sub-skill is responsible for getting any user approval it needs before declaring itself done; the orchestrator does not re-prompt on top.
 
 ## Input
 
@@ -27,7 +27,7 @@ The orchestrator is the canonical entry point for the workflow. It walks the use
 5. Loop:
    - Determine the current phase from `state.json`.
    - Invoke the corresponding sub-skill via the `Skill` tool.
-   - When the sub-skill reports completion, update `state.json` (move the phase into `completed_phases`, advance `current_phase`) and print a one-line announcement (e.g., `design complete — advancing to document`). Do not ask for confirmation; the sub-skill is expected to have already obtained whatever user approval is needed.
+   - When the sub-skill reports completion, update `state.json` (move the phase into `completed_phases`, advance `current_phase`) and print a one-line announcement (e.g., `design complete — advancing to plan`). Do not ask for confirmation; the sub-skill is expected to have already obtained whatever user approval is needed.
    - If the user interrupts to revisit a previous phase, rewind `current_phase`, remove it from `completed_phases`, and re-invoke that sub-skill.
 6. When `current_phase` reaches `done`, summarize the completed workflow and exit.
 

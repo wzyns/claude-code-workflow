@@ -9,12 +9,10 @@ The orchestrator and each sub-skill persist progress in `.claude/ccw/<feature-na
   "feature_name": "user-auth",
   "started_at": "2026-05-01T10:00:00Z",
   "current_phase": "implement",
-  "completed_phases": ["design", "document", "plan"],
+  "completed_phases": ["design", "plan"],
   "config": {
     "design_doc_path": ".claude/ccw/user-auth/design.md",
-    "design_doc_external": null,
     "plan_doc_path": ".claude/ccw/user-auth/plan.md",
-    "plan_doc_external": null,
     "branch_name": "feature/user-auth"
   },
   "artifacts": {
@@ -59,7 +57,7 @@ Each finding has a minimal schema:
 
 `current_phase` and entries of `completed_phases` use these values:
 
-- `design`, `document`, `plan`, `implement`, `ai-review`, `user-review`, `pr`, `done`
+- `design`, `plan`, `implement`, `ai-review`, `user-review`, `pr`, `done`
 
 ## `implementation_steps[].status` Values
 

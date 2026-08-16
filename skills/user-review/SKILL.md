@@ -1,6 +1,6 @@
 ---
 name: user-review
-description: Seventh phase of the ccw workflow. Present a structured summary of all changes plus the AI review findings to the user for final review before opening a PR. Let the user decide reflect/skip/defer per finding and apply any additional changes from their feedback. Use this when the user invokes /ccw:user-review directly, or when the orchestrator (/ccw:start) delegates the user review phase.
+description: Fifth phase of the ccw workflow. Present a structured summary of all changes plus the AI review findings to the user for final review before opening a PR. Let the user decide reflect/skip/defer per finding and apply any additional changes from their feedback. Use this when the user invokes /ccw:user-review directly, or when the orchestrator (/ccw:start) delegates the user review phase.
 ---
 
 # /ccw:user-review — Final User Review

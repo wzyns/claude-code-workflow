@@ -24,7 +24,6 @@ claude-code-workflow/
 │       └── phases/
 │           ├── start.md
 │           ├── design.md
-│           ├── document.md
 │           ├── plan.md
 │           ├── implement.md
 │           ├── ai-review.md
@@ -33,7 +32,6 @@ claude-code-workflow/
 └── skills/
     ├── start/SKILL.md              # Orchestrator
     ├── design/SKILL.md
-    ├── document/SKILL.md
     ├── plan/SKILL.md
     ├── implement/SKILL.md
     ├── ai-review/SKILL.md
@@ -43,13 +41,11 @@ claude-code-workflow/
 
 ## Per-Feature Workflow Working Directory (in the consuming project)
 
-Created by the plugin inside whatever project is using it. By default, both metadata and artifacts live under the same directory:
+Created by the plugin inside whatever project is using it. Metadata and artifacts always live under the same directory — the skills never ask for an alternative location:
 
 ```
 .claude/ccw/<feature-name>/
 ├── state.json    # Progress state
-├── design.md     # Default location for the design document
-└── plan.md       # Default location for the plan document
+├── design.md     # Design document (written at the end of the design phase)
+└── plan.md       # Plan document (written by the plan phase)
 ```
-
-> When the user chooses an external destination (e.g., Confluence) for `design.md` or `plan.md`, the skill first attempts to publish directly using an available tool (MCP server, CLI, etc.). If no such tool is available, it outputs the markdown body for the user to publish manually. The external location (URL, description, etc.) is recorded in `state.json` under `design_doc_external` or `plan_doc_external`. In that case `design.md` / `plan.md` may be absent from this directory.

@@ -6,17 +6,16 @@ This directory is the **source of truth** for the `ccw` plugin's design. The ski
 
 `ccw` is a Claude Code plugin that turns the recurring process of developing a single feature into a guided workflow. Instead of the user manually instructing each step, the skill drives the workflow phase-by-phase while the user only needs to respond and approve at each transition.
 
-The workflow consists of 7 phases:
+The workflow consists of 6 phases:
 
 | Phase | Skill | Description |
 |-------|-------|-------------|
-| 1 | `/ccw:design` | Design the feature through dialogue with the user |
-| 2 | `/ccw:document` | Write the agreed-upon design as a markdown document |
-| 3 | `/ccw:plan` | Decompose the implementation into well-defined steps |
-| 4 | `/ccw:implement` | For each step: [implement → unit test → user review → commit], iterating |
-| 5 | `/ccw:ai-review` | Assistant auto self-reviews the commits recorded for this workflow and emits findings to `artifacts.ai_review_findings` (no prompt, no fix commits) |
-| 6 | `/ccw:user-review` | The user personally reviews all changes and decides per-item what to do with AI review findings |
-| 7 | `/ccw:pr` | Create the PR, including any noteworthy development notes as PR comments |
+| 1 | `/ccw:design` | Design the feature through dialogue with the user, then save the agreed design as a markdown document |
+| 2 | `/ccw:plan` | Decompose the implementation into well-defined steps |
+| 3 | `/ccw:implement` | For each step: [implement → unit test → user review → commit], iterating |
+| 4 | `/ccw:ai-review` | Assistant auto self-reviews the commits recorded for this workflow and emits findings to `artifacts.ai_review_findings` (no prompt, no fix commits) |
+| 5 | `/ccw:user-review` | The user personally reviews all changes and decides per-item what to do with AI review findings |
+| 6 | `/ccw:pr` | Create the PR, including any noteworthy development notes as PR comments |
 
 The orchestrator skill `/ccw:start` walks the user through these phases in order.
 
@@ -38,7 +37,6 @@ The orchestrator skill `/ccw:start` walks the user through these phases in order
 |-------|------|
 | Orchestrator | [phases/start.md](phases/start.md) |
 | Design | [phases/design.md](phases/design.md) |
-| Document | [phases/document.md](phases/document.md) |
 | Plan | [phases/plan.md](phases/plan.md) |
 | Implement | [phases/implement.md](phases/implement.md) |
 | AI Review | [phases/ai-review.md](phases/ai-review.md) |

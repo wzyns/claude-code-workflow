@@ -1,6 +1,6 @@
 ---
 name: ai-review
-description: Sixth phase of the ccw workflow. Auto self-review the commits recorded in state.json.notes for this workflow and emit findings to state.json.artifacts.ai_review_findings. No "proceed/skip" prompt and no fix commits — per-finding decisions happen in user-review. Use this when the user invokes /ccw:ai-review directly, or when the orchestrator (/ccw:start) delegates the AI review phase.
+description: Fourth phase of the ccw workflow. Auto self-review the commits recorded in state.json.notes for this workflow and emit findings to state.json.artifacts.ai_review_findings. No "proceed/skip" prompt and no fix commits — per-finding decisions happen in user-review. Use this when the user invokes /ccw:ai-review directly, or when the orchestrator (/ccw:start) delegates the AI review phase.
 ---
 
 # /ccw:ai-review — AI Review

@@ -1,19 +1,19 @@
 ---
 name: start
-description: Orchestrate the ccw feature development workflow. Walks the user through 7 phases (design → document → plan → implement → ai-review → user-review → pr), invokes the corresponding sub-skill for each phase, manages state in .claude/ccw/<feature>/state.json, and auto-advances each transition as soon as the sub-skill reports completion (each sub-skill owns any user approval it needs). Use this when the user says "start a new feature", "begin a workflow", or runs /ccw:start.
+description: Orchestrate the ccw feature development workflow. Walks the user through 6 phases (design → plan → implement → ai-review → user-review → pr), invokes the corresponding sub-skill for each phase, manages state in .claude/ccw/<feature>/state.json, and auto-advances each transition as soon as the sub-skill reports completion (each sub-skill owns any user approval it needs). Use this when the user says "start a new feature", "begin a workflow", or runs /ccw:start.
 ---
 
 # /ccw:start — Orchestrator
 
-You are the orchestrator for the `ccw` feature development workflow. Your job is to walk the user through 7 phases of feature development. **Real work happens inside per-phase sub-skills**; you sequence them and manage shared state. Each sub-skill is responsible for collecting any user approval it needs *before* declaring itself complete, so the orchestrator does not re-prompt on top of that — it advances automatically once the sub-skill returns.
+You are the orchestrator for the `ccw` feature development workflow. Your job is to walk the user through 6 phases of feature development. **Real work happens inside per-phase sub-skills**; you sequence them and manage shared state. Each sub-skill is responsible for collecting any user approval it needs *before* declaring itself complete, so the orchestrator does not re-prompt on top of that — it advances automatically once the sub-skill returns.
 
 ## Phase order
 
 ```
-design → document → plan → implement → ai-review → user-review → pr → done
+design → plan → implement → ai-review → user-review → pr → done
 ```
 
-Each phase corresponds to a sub-skill: `ccw:design`, `ccw:document`, `ccw:plan`, etc.
+Each phase corresponds to a sub-skill: `ccw:design`, `ccw:plan`, etc.
 
 ## Step 1 — Detect existing workflows
 
@@ -64,7 +64,7 @@ Repeat until `current_phase == "done"`:
    b. If the sub-skill reports its phase is complete, update `state.json`:
       - Push `current_phase` into `completed_phases`
       - Set `current_phase` to the next phase in the order
-   c. Print a one-line transition announcement (e.g., `design complete — advancing to document`) and continue the loop. **Do not ask the user to confirm the transition** — the sub-skill is responsible for collecting any user approval it needs before reporting completion.
+   c. Print a one-line transition announcement (e.g., `design complete — advancing to plan`) and continue the loop. **Do not ask the user to confirm the transition** — the sub-skill is responsible for collecting any user approval it needs before reporting completion.
    d. If at any point the user interrupts to ask for going back (e.g., "go back to plan", "let's revisit design"), rewind `current_phase` to the requested phase, remove it from `completed_phases`, and re-invoke that sub-skill.
 
 ## State management rules

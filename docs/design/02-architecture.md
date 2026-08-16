@@ -19,8 +19,7 @@ Each phase is implemented as an independent skill folder under `skills/`.
 
 | Skill folder | Invoked as | Phase | Spec |
 |---|---|---|---|
-| `design` | `/ccw:design` | Conversational design | [phases/design.md](phases/design.md) |
-| `document` | `/ccw:document` | Design documentation | [phases/document.md](phases/document.md) |
+| `design` | `/ccw:design` | Conversational design + design documentation | [phases/design.md](phases/design.md) |
 | `plan` | `/ccw:plan` | Implementation plan | [phases/plan.md](phases/plan.md) |
 | `implement` | `/ccw:implement` | Step-by-step implementation | [phases/implement.md](phases/implement.md) |
 | `ai-review` | `/ccw:ai-review` | AI review | [phases/ai-review.md](phases/ai-review.md) |
@@ -52,7 +51,6 @@ The orchestrator performs the following:
 
 ```
 /ccw:design
-/ccw:document
 /ccw:plan
 /ccw:implement
 /ccw:ai-review

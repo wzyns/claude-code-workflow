@@ -4,12 +4,12 @@ This file orients Claude Code when working on this repository.
 
 ## What this project is
 
-This repo is the source of the **`ccw` Claude Code plugin** (claude-code-workflow). The plugin provides a guided, phase-by-phase workflow for developing a single feature: design → document → plan → implement → AI review → user review → PR.
+This repo is the source of the **`ccw` Claude Code plugin** (claude-code-workflow). The plugin provides a guided, phase-by-phase workflow for developing a single feature: design → plan → implement → AI review → user review → PR.
 
 The plugin consists of:
 
-- An orchestrator skill (`/ccw:start`) that walks the user through all 7 phases
-- 7 per-phase sub-skills (`/ccw:design`, `/ccw:document`, ...) that can also be invoked independently
+- An orchestrator skill (`/ccw:start`) that walks the user through all 6 phases
+- 6 per-phase sub-skills (`/ccw:design`, `/ccw:plan`, ...) that can also be invoked independently
 
 ## Repository layout
 
@@ -32,7 +32,6 @@ The plugin consists of:
 │       └── phases/
 │           ├── start.md
 │           ├── design.md
-│           ├── document.md
 │           ├── plan.md
 │           ├── implement.md
 │           ├── ai-review.md
@@ -101,6 +100,6 @@ Files that are local to a single workflow run — primarily `state.json` under `
 When the `ccw` plugin is *used* (in some other project), it creates `.claude/ccw/<feature-name>/` containing:
 
 - `state.json` — progress state for an in-progress feature
-- `design.md` and `plan.md` — feature artifacts (default location; the user may pick an external destination like Confluence instead)
+- `design.md` and `plan.md` — feature artifacts (always saved here; the skills never ask for an alternative location)
 
 These paths are mentioned here for context only. They never appear in this repo.
